@@ -3,748 +3,560 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plano ENEM 2026 🎯</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<title>Plano ENEM 2026 - Victor Kaua</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #FAFAF7;
-  --card: #FFFFFF;
-  --navy: #1D3557;
-  --red: #FF3B5C;
-  --yellow: #FFD166;
-  --green: #06D6A0;
-  --gray: #6B7280;
-  --light: #F3F4F6;
-  --accent: #FF3B5C;
-  --shadow: 0 2px 16px rgba(0,0,0,0.08);
-  --radius: 16px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Nunito', system-ui, sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; }
-
-/* ── COUNTDOWN ── */
-#countdown-bar {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--navy);
-  padding: 10px 16px;
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-}
-#countdown-bar .label { color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap; }
-#countdown-bar .days { color: var(--yellow); font-size: 20px; font-weight: 900; white-space: nowrap; }
-.progress-track { flex: 1; height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--yellow), var(--red)); border-radius: 99px; transition: width 1s ease; }
-
-/* ── HERO ── */
-.hero {
-  padding: 24px 16px 16px;
-  text-align: center;
-}
-.hero h1 { font-size: 28px; font-weight: 900; color: var(--navy); line-height: 1.1; }
-.hero h1 span { color: var(--red); }
-.hero p { font-size: 14px; color: var(--gray); margin-top: 6px; }
-.stats { display: flex; justify-content: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
-.stat { background: var(--navy); color: #fff; border-radius: 12px; padding: 8px 16px; font-size: 13px; font-weight: 700; }
-.stat span { color: var(--yellow); }
-
-/* ── ROTINA ── */
-.rotina { display: flex; gap: 8px; padding: 0 16px 16px; overflow-x: auto; }
-.rotina-item { background: var(--card); border-radius: 12px; padding: 12px 14px; min-width: 140px; box-shadow: var(--shadow); flex-shrink: 0; border-top: 4px solid var(--accent); }
-.rotina-item .tempo { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: .5px; }
-.rotina-item .desc { font-size: 13px; font-weight: 600; color: var(--navy); margin-top: 4px; }
-
-/* ── SEMANA GRID ── */
-.section-label { padding: 8px 16px 8px; font-size: 12px; font-weight: 800; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
-.semanas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px 16px; }
-@media(min-width:600px){ .semanas-grid { grid-template-columns: repeat(4,1fr); } }
-@media(min-width:900px){ .semanas-grid { grid-template-columns: repeat(6,1fr); } }
-.semana-btn {
-  background: var(--card); border: 2.5px solid transparent;
-  border-radius: var(--radius); padding: 12px 8px;
-  cursor: pointer; text-align: center; transition: all .18s;
-  box-shadow: var(--shadow); position: relative;
-}
-.semana-btn:hover { transform: translateY(-3px); }
-.semana-btn.active { border-color: var(--week-color, var(--red)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--week-color,var(--red)) 20%, transparent); }
-.semana-btn .emoji { font-size: 22px; }
-.semana-btn .num { font-size: 10px; font-weight: 800; color: var(--week-color, var(--gray)); text-transform: uppercase; margin-top: 4px; }
-.semana-btn .nome { font-size: 11px; font-weight: 700; color: var(--navy); margin-top: 2px; line-height: 1.2; }
-.semana-btn .done-badge { position: absolute; top: 6px; right: 6px; font-size: 10px; }
-
-/* ── DETAIL PANEL ── */
-#detail { padding: 0 16px 24px; display: none; }
-#detail.visible { display: block; }
-
-.semana-header {
-  border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
-  color: #fff;
-}
-.semana-header .sh-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: .8; }
-.semana-header h2 { font-size: 22px; font-weight: 900; margin-top: 4px; }
-.semana-header .redacao-badge {
-  display: inline-block; background: rgba(255,255,255,0.25);
-  border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 800;
-  margin-top: 10px; letter-spacing: .5px;
-}
-
-/* ── DIAS TABS ── */
-.dias-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
-.dia-tab {
-  background: var(--light); border: none; border-radius: 10px;
-  padding: 8px 16px; cursor: pointer; font-family: 'Nunito', sans-serif;
-  font-size: 13px; font-weight: 700; color: var(--gray);
-  white-space: nowrap; transition: all .15s; position: relative;
-}
-.dia-tab.active { color: #fff; }
-.dia-tab .check { font-size: 10px; }
-
-/* ── MISSION CARD ── */
-.mission-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-.mission-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--light); }
-.mission-header .foco-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
-.mission-header h3 { font-size: 20px; font-weight: 900; color: var(--navy); margin-top: 4px; }
-.mission-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
-
-/* ── SECTION BLOCKS ── */
-.block-title {
-  font-size: 11px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .8px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
-}
-.video-list { display: flex; flex-direction: column; gap: 8px; }
-.video-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  background: var(--light); border-radius: 12px; padding: 12px;
-  text-decoration: none; transition: background .15s;
-}
-.video-item:hover { background: #E9EAF0; }
-.video-item .vthumb {
-  width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.video-item .vinfo .vtitle { font-size: 13px; font-weight: 700; color: var(--navy); }
-.video-item .vinfo .vdur { font-size: 11px; color: var(--gray); margin-top: 2px; }
-.video-item .vinfo .vchannel { font-size: 10px; font-weight: 700; margin-top: 2px; }
-
-.atividade-link {
-  display: block; background: var(--light); border-radius: 12px;
-  padding: 14px; text-decoration: none; transition: background .15s;
-  border-left: 4px solid var(--accent);
-}
-.atividade-link:hover { background: #E9EAF0; }
-.atividade-link .at-title { font-size: 14px; font-weight: 700; color: var(--navy); }
-.atividade-link .at-sub { font-size: 11px; color: var(--gray); margin-top: 3px; }
-
-/* ── REDAÇÃO CARD ── */
-.redacao-block {
-  border-radius: 12px; padding: 14px;
-  border: 2px solid var(--yellow);
-  background: #FFFBEA;
-}
-.redacao-block .rt { font-size: 11px; font-weight: 800; color: #B45309; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
-.redacao-block .tema { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-.redacao-block .instrucao { font-size: 13px; color: #374151; line-height: 1.5; }
-.redacao-block a { color: #B45309; font-weight: 700; }
-
-.desafio-block {
-  border-radius: 12px; padding: 14px;
-  background: linear-gradient(135deg, #FFF0F3, #FFE8ED);
-  border-left: 4px solid var(--red);
-}
-.desafio-block .dt { font-size: 11px; font-weight: 800; color: var(--red); text-transform: uppercase; margin-bottom: 4px; }
-.desafio-block .dtxt { font-size: 14px; font-weight: 700; color: var(--navy); }
-
-/* ── COMPLETE BTN ── */
-.complete-btn {
-  width: 100%; padding: 14px; border: none; border-radius: 12px;
-  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800;
-  cursor: pointer; transition: all .2s; margin-top: 4px;
-  background: var(--light); color: var(--gray);
-}
-.complete-btn.done { background: var(--green); color: #fff; }
-.complete-btn:hover:not(.done) { background: #E5E7EB; }
-
-/* ── FOOTER ── */
-footer { text-align: center; padding: 24px 16px 40px; color: var(--gray); font-size: 12px; }
+:root{--preto:#0A0A0A;--grafite:#1C1C1C;--chumbo:#2E2E2E;--branco:#F5F5F5;--prata:#B0B0B0;--vermelho:#E8002D;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--preto);color:var(--branco);min-height:100vh}
+#cb{position:sticky;top:0;z-index:200;background:var(--vermelho);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cbl{color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+.cbd{color:#fff;font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1;white-space:nowrap}
+.pt{flex:1;height:6px;background:rgba(255,255,255,0.3);border-radius:99px;overflow:hidden}
+.pf{height:100%;background:#fff;border-radius:99px;transition:width 1s ease}
+.hero{background:var(--grafite);border-bottom:3px solid var(--vermelho);overflow:hidden;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0px,transparent 18px,rgba(255,255,255,0.025) 18px,rgba(255,255,255,0.025) 20px);pointer-events:none}
+.hi{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px}
+.escudo{width:80px;height:80px;filter:drop-shadow(0 4px 12px rgba(232,0,45,0.5));margin-bottom:12px}
+.hn{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:3px;color:#fff;line-height:1;text-align:center}
+.hn .dest{color:var(--vermelho)}
+.hsub{font-size:13px;color:var(--prata);margin-top:6px;text-align:center}
+.mw{width:100%;overflow:hidden;margin-top:4px}
+.ms{width:100%;max-width:380px;display:block;margin:0 auto}
+.hs{display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap;padding:0 16px 20px}
+.hst{background:var(--preto);border:1px solid #333;border-radius:10px;padding:8px 14px;font-size:12px;font-weight:800;color:var(--prata);text-align:center}
+.hst .hv{display:block;font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;line-height:1}
+.ld{display:flex;gap:6px;padding:14px 16px;overflow-x:auto;background:var(--grafite);border-bottom:1px solid #333}
+.li{display:flex;align-items:center;gap:6px;background:var(--chumbo);border-radius:8px;padding:6px 10px;white-space:nowrap;flex-shrink:0}
+.ldot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.li span{font-size:11px;font-weight:700;color:var(--prata)}
+.sl{padding:16px 16px 8px;font-size:11px;font-weight:800;color:var(--prata);text-transform:uppercase;letter-spacing:1.5px}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 16px 16px}
+@media(min-width:560px){.sg{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:800px){.sg{grid-template-columns:repeat(6,1fr)}}
+.sb{background:var(--grafite);border:2px solid #333;border-radius:var(--radius);padding:12px 8px;cursor:pointer;text-align:center;transition:all .18s;position:relative}
+.sb:hover{transform:translateY(-2px);border-color:#555}
+.sb.active{border-color:var(--vermelho);box-shadow:0 0 0 2px rgba(232,0,45,0.3)}
+.sb .se{font-size:20px}.sb .sn{font-size:10px;font-weight:800;color:var(--vermelho);text-transform:uppercase;margin-top:3px}
+.sb .snm{font-size:10px;font-weight:700;color:var(--branco);margin-top:2px;line-height:1.2}
+.sb .sd{position:absolute;top:5px;right:5px;font-size:10px}
+#det{padding:0 16px 32px;display:none}#det.visible{display:block}
+.shdr{border-radius:var(--radius);padding:18px;margin-bottom:14px;background:var(--grafite);border-left:4px solid var(--vermelho)}
+.shdr .stag{font-size:10px;font-weight:800;color:var(--vermelho);text-transform:uppercase;letter-spacing:1px}
+.shdr h2{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-top:4px}
+.shdr .sbadge{display:inline-block;background:rgba(232,0,45,0.15);border:1px solid rgba(232,0,45,0.3);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800;color:var(--vermelho);margin-top:8px}
+.dtabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
+.dtab{background:var(--grafite);border:1.5px solid #333;border-radius:8px;padding:7px 13px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--prata);white-space:nowrap;transition:all .15s}
+.mc{background:var(--grafite);border-radius:var(--radius);border:1px solid #333;overflow:hidden}
+.mhdr{padding:14px 18px 12px;border-bottom:1px solid #2a2a2a;display:flex;align-items:center;gap:10px}
+.dbadge{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.fl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+.mhdr h3{font-size:17px;font-weight:900;color:#fff;margin-top:2px;line-height:1.2}
+.mb{padding:16px 18px;display:flex;flex-direction:column;gap:16px}
+.bt{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;color:var(--prata)}
+.bt::before{content:'';display:block;width:3px;height:14px;border-radius:2px;background:var(--vermelho)}
+.vl{display:flex;flex-direction:column;gap:7px}
+.vi{display:flex;align-items:flex-start;gap:10px;background:var(--chumbo);border-radius:10px;padding:11px;text-decoration:none;transition:background .15s;border:1px solid #3a3a3a}
+.vi:hover{background:#383838}
+.vt{width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.vn .vtl{font-size:12px;font-weight:700;color:#fff}.vn .vm{font-size:10px;color:var(--prata);margin-top:2px}.vn .vc{font-size:10px;font-weight:800;margin-top:2px}
+.al{display:block;background:var(--chumbo);border-radius:10px;padding:12px;text-decoration:none;border-left:3px solid var(--vermelho);transition:background .15s}
+.al:hover{background:#383838}.al .at{font-size:13px;font-weight:700;color:#fff}.al .as{font-size:10px;color:var(--prata);margin-top:3px}
+.espb{background:var(--chumbo);border-radius:10px;padding:14px;border-top:3px solid #F7B731}
+.espb .etag{font-size:10px;font-weight:800;color:#F7B731;text-transform:uppercase;margin-bottom:6px}
+.espb .etit{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px}
+.espb .etx{font-size:12px;color:var(--prata);line-height:1.6}.espb a{color:#F7B731;font-weight:700;text-decoration:none}
+.redb{background:var(--chumbo);border-radius:10px;padding:14px;border-top:3px solid #00C9A7}
+.redb .rtag{font-size:10px;font-weight:800;color:#00C9A7;text-transform:uppercase;margin-bottom:6px}
+.redb .rtit{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px}
+.redb .rtx{font-size:12px;color:var(--prata);line-height:1.6}.redb a{color:#00C9A7;font-weight:700;text-decoration:none}
+.exb{background:var(--chumbo);border-radius:10px;padding:14px;border-top:3px solid #A855F7}
+.exb .xtag{font-size:10px;font-weight:800;color:#A855F7;text-transform:uppercase;margin-bottom:6px}
+.exb .xtit{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px}
+.exb .xtx{font-size:12px;color:var(--prata);line-height:1.6}.exb a{color:#A855F7;font-weight:700;text-decoration:none}
+.dsb{background:linear-gradient(135deg,#1a0a0a,#2a0a0a);border-radius:10px;padding:13px;border:1px solid rgba(232,0,45,0.3)}
+.dsb .dtag{font-size:10px;font-weight:800;color:var(--vermelho);text-transform:uppercase;margin-bottom:4px}
+.dsb .dtxt{font-size:13px;font-weight:700;color:#fff}
+.cbtn{width:100%;padding:13px;border:2px solid #333;border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;background:transparent;color:var(--prata)}
+.cbtn.done{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+.cbtn:hover:not(.done){border-color:#555;color:#fff}
+footer{text-align:center;padding:24px 16px 40px;font-size:11px;color:#444;border-top:1px solid #1a1a1a}
+footer b{color:var(--vermelho)}
 </style>
 </head>
 <body>
-
-<!-- Countdown -->
-<div id="countdown-bar">
-  <div class="label">🎯 ENEM em</div>
-  <div class="days" id="days-count">—</div>
-  <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-  <div class="label" id="days-label">dias</div>
+<div id="cb">
+  <div class="cbl">ENEM em</div>
+  <div class="cbd" id="dc">-</div>
+  <div class="pt"><div class="pf" id="pf" style="width:0%"></div></div>
+  <div class="cbl" id="dl">dias</div>
 </div>
-
-<!-- Hero -->
 <div class="hero">
-  <h1>Plano <span>ENEM 2026</span> 🚀</h1>
-  <p>10 de junho → 8 de novembro • Projeto Social</p>
-  <div class="stats">
-    <div class="stat"><span>18</span> semanas</div>
-    <div class="stat"><span>90</span> aulas</div>
-    <div class="stat"><span>2h30</span> por dia</div>
-    <div class="stat"><span>✍️ 18</span> redações</div>
+  <div class="hi">
+    <svg class="escudo" viewBox="0 0 100 110">
+      <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2a2a"/><stop offset="100%" stop-color="#0a0a0a"/></linearGradient></defs>
+      <path d="M50 4L92 20L92 58Q92 88 50 106Q8 88 8 58L8 20Z" fill="url(#g1)" stroke="#E8002D" stroke-width="3"/>
+      <line x1="50" y1="4" x2="50" y2="106" stroke="#fff" stroke-width="2.5"/>
+      <line x1="8" y1="55" x2="92" y2="55" stroke="#fff" stroke-width="2.5"/>
+      <clipPath id="c1"><path d="M50 4L92 20L92 55L50 55Z"/></clipPath>
+      <rect width="100" height="110" fill="#fff" clip-path="url(#c1)"/>
+      <clipPath id="c2"><path d="M8 55L50 55L50 106Q29 97 8 58Z"/></clipPath>
+      <rect width="100" height="110" fill="#fff" clip-path="url(#c2)"/>
+      <text x="50" y="38" text-anchor="middle" font-size="9" fill="#E8002D">&#9733;&#9733;&#9733;&#9733;&#9733;</text>
+      <text x="50" y="80" text-anchor="middle" font-size="7" fill="#0a0a0a" font-weight="bold">S.C.C.P</text>
+      <path d="M50 4L92 20L92 58Q92 88 50 106Q8 88 8 58L8 20Z" fill="none" stroke="#E8002D" stroke-width="3"/>
+    </svg>
+    <div class="hn">Bora, <span class="dest">Victor Kaua!</span></div>
+    <div class="hsub">Seu plano personalizado para o ENEM 2026 &#x1F5A4;&#x1F90D;</div>
+    <div class="mw">
+      <svg class="ms" viewBox="0 0 380 140">
+        <defs>
+          <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#444"/><stop offset="100%" stop-color="#111"/></linearGradient>
+          <linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0a0a0a"/><stop offset="49%" stop-color="#0a0a0a"/><stop offset="51%" stop-color="#f0f0f0"/><stop offset="100%" stop-color="#f0f0f0"/></linearGradient>
+        </defs>
+        <ellipse cx="190" cy="130" rx="150" ry="8" fill="rgba(0,0,0,0.4)"/>
+        <circle cx="90" cy="105" r="32" fill="url(#rg)" stroke="#E8002D" stroke-width="2.5"/>
+        <circle cx="90" cy="105" r="22" fill="none" stroke="#555" stroke-width="1.5"/>
+        <circle cx="90" cy="105" r="8" fill="#333" stroke="#E8002D" stroke-width="1.5"/>
+        <line x1="90" y1="73" x2="90" y2="137" stroke="#666" stroke-width="1.2"/>
+        <line x1="58" y1="105" x2="122" y2="105" stroke="#666" stroke-width="1.2"/>
+        <line x1="67" y1="82" x2="113" y2="128" stroke="#666" stroke-width="1.2"/>
+        <line x1="113" y1="82" x2="67" y2="128" stroke="#666" stroke-width="1.2"/>
+        <circle cx="300" cy="105" r="30" fill="url(#rg)" stroke="#E8002D" stroke-width="2.5"/>
+        <circle cx="300" cy="105" r="21" fill="none" stroke="#555" stroke-width="1.5"/>
+        <circle cx="300" cy="105" r="7" fill="#333" stroke="#E8002D" stroke-width="1.5"/>
+        <line x1="300" y1="75" x2="300" y2="135" stroke="#666" stroke-width="1.2"/>
+        <line x1="270" y1="105" x2="330" y2="105" stroke="#666" stroke-width="1.2"/>
+        <line x1="279" y1="84" x2="321" y2="126" stroke="#666" stroke-width="1.2"/>
+        <line x1="321" y1="84" x2="279" y2="126" stroke="#666" stroke-width="1.2"/>
+        <rect x="88" y="102" width="80" height="6" rx="3" fill="#222" stroke="#444"/>
+        <line x1="90" y1="105" x2="180" y2="60" stroke="#555" stroke-width="3" stroke-linecap="round"/>
+        <line x1="300" y1="105" x2="220" y2="58" stroke="#555" stroke-width="3" stroke-linecap="round"/>
+        <line x1="180" y1="60" x2="220" y2="58" stroke="#555" stroke-width="2"/>
+        <path d="M140 72Q155 55 200 52Q245 50 260 68Q255 88 200 90Q145 90 140 72Z" fill="url(#tg)" stroke="#333" stroke-width="1"/>
+        <line x1="200" y1="51" x2="200" y2="91" stroke="#E8002D" stroke-width="2"/>
+        <text x="172" y="75" font-size="8" fill="#fff" font-weight="bold">SCCP</text>
+        <text x="208" y="75" font-size="8" fill="#111" font-weight="bold">1910</text>
+        <path d="M115 90Q130 65 160 62L210 60L260 70Q280 78 290 90Q250 100 200 102Q150 103 115 90Z" fill="#1a1a1a" stroke="#E8002D" stroke-width="1.5"/>
+        <path d="M120 88Q160 78 210 76Q240 76 270 84" fill="none" stroke="#E8002D" stroke-width="2"/>
+        <path d="M115 90Q100 82 92 75Q110 68 135 72Q130 80 115 90Z" fill="#111" stroke="#E8002D" stroke-width="1"/>
+        <path d="M285 88Q298 75 310 78Q305 92 290 95Z" fill="#111" stroke="#444" stroke-width="1"/>
+        <line x1="285" y1="72" x2="298" y2="62" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+        <line x1="285" y1="72" x2="272" y2="66" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="285" cy="72" r="3" fill="#E8002D"/>
+        <path d="M165 62Q200 56 235 60L232 66Q200 62 168 68Z" fill="#2a2a2a" stroke="#555"/>
+        <ellipse cx="215" cy="53" rx="10" ry="10" fill="#111" stroke="#E8002D" stroke-width="1.5"/>
+        <path d="M207 50Q215 44 223 50" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <path d="M215 63Q220 58 235 60Q230 70 218 72Z" fill="#111" stroke="#444"/>
+        <line x1="220" y1="62" x2="283" y2="70" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+        <path d="M116 90Q108 95 98 97Q92 98 88 96" fill="none" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="75" cy="95" r="4" fill="rgba(200,200,200,0.15)"/>
+        <circle cx="62" cy="92" r="5" fill="rgba(200,200,200,0.1)"/>
+        <line x1="30" y1="78" x2="65" y2="78" stroke="rgba(232,0,45,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="20" y1="84" x2="60" y2="84" stroke="rgba(232,0,45,0.25)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="35" y1="90" x2="68" y2="90" stroke="rgba(232,0,45,0.2)" stroke-width="1" stroke-linecap="round"/>
+        <rect x="88" y="88" width="36" height="14" rx="2" fill="#f5f5f5" stroke="#ccc"/>
+        <text x="106" y="99" text-anchor="middle" font-size="7.5" fill="#111" font-weight="bold">ENEM26</text>
+      </svg>
+    </div>
+  </div>
+  <div class="hs">
+    <div class="hst"><span class="hv">18</span>Semanas</div>
+    <div class="hst"><span class="hv">90</span>Aulas</div>
+    <div class="hst"><span class="hv">1</span>Materia/dia</div>
+    <div class="hst"><span class="hv">18</span>Redacoes</div>
+    <div class="hst"><span class="hv">18</span>Espanhol</div>
   </div>
 </div>
-
-<!-- Rotina -->
-<div class="rotina">
-  <div class="rotina-item" style="border-top-color:#FF3B5C">
-    <div class="tempo">▶️ 0–60 min</div>
-    <div class="desc">Vídeos (≥40 min) + Atividade prática</div>
-  </div>
-  <div class="rotina-item" style="border-top-color:#1D3557">
-    <div class="tempo">✏️ 60–110 min</div>
-    <div class="desc">Exercícios do ENEM + Desafio do dia</div>
-  </div>
-  <div class="rotina-item" style="border-top-color:#FFD166">
-    <div class="tempo">🎬 110–150 min</div>
-    <div class="desc">Filme / Debate / Jogo / Redação</div>
-  </div>
+<div class="ld">
+  <div class="li"><div class="ldot" style="background:#4ECDC4"></div><span>Seg - Portugues/Lit.</span></div>
+  <div class="li"><div class="ldot" style="background:#F9CA24"></div><span>Ter - Matematica</span></div>
+  <div class="li"><div class="ldot" style="background:#45B7D1"></div><span>Qua - Hist./Geo./Fil.</span></div>
+  <div class="li"><div class="ldot" style="background:#96CEB4"></div><span>Qui - Bio./Fis./Quim.</span></div>
+  <div class="li"><div class="ldot" style="background:#E8002D"></div><span>Sex - Redacao + Espanhol</span></div>
 </div>
-
-<!-- Semanas -->
-<div class="section-label">Escolha a semana</div>
-<div class="semanas-grid" id="semanas-grid"></div>
-
-<!-- Detail -->
-<div id="detail">
-  <div class="semana-header" id="sem-header"></div>
-  <div class="dias-tabs" id="dias-tabs"></div>
-  <div class="mission-card" id="mission-card"></div>
+<div class="sl">Selecione a semana</div>
+<div class="sg" id="sg"></div>
+<div id="det">
+  <div class="shdr" id="shdr"></div>
+  <div class="dtabs" id="dtabs"></div>
+  <div class="mc" id="mc"></div>
 </div>
-
-<footer>🏆 18 semanas • ENEM 8 de novembro de 2026 • Você consegue!</footer>
-
+<footer>&#127949; Feito pra <b>Victor Kaua</b> - Fiel ate o fim e aprovado no ENEM 2026 &#x1F5A4;&#x1F90D;</footer>
 <script>
-// ─── DADOS ───────────────────────────────────────────────────────────────
-
-const CORES = [
-  "#FF6B6B","#4ECDC4","#45B7D1","#96CEB4","#F9CA24","#C084FC","#F0A500",
-  "#818CF8","#34D399","#F472B6","#A855F7","#10B981","#F97316","#FBBF24",
-  "#94A3B8","#EC4899","#60A5FA","#FB923C"
+var DC=['#4ECDC4','#F9CA24','#45B7D1','#96CEB4','#E8002D'];
+var DN=['Segunda','Terca','Quarta','Quinta','Sexta'];
+var DM=['Portugues e Lit.','Matematica','Hist./Geo./Fil.','Bio./Fis./Quim.','Redacao + Espanhol'];
+var DE=['&#128216;','&#128208;','&#127757;','&#129514;','&#9999;'];
+</script>
+<script id="dados">
+var ESP = [
+  {t:"Vocabulario e falsos cognatos", tx:"Embarazada significa gravida. Borracha significa bebada. Resolva 3 questoes do ENEM sobre falsos cognatos em espanhol.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+enem"},
+  {t:"Interpretacao de texto em espanhol", tx:"O ENEM testa leitura, nao fluencia. Pratique identificar tema, ideia principal e conectivos como sin embargo, ademas, por lo tanto.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+interpretacao+enem"},
+  {t:"Conectivos em espanhol", tx:"Sin embargo = porem. Ademas = alem disso. Por lo tanto = portanto. Encontre-os em textos e reescreva em portugues.", u:"https://www.youtube.com/@Descomplica/search?query=espanhol+conectivos+enem"},
+  {t:"Generos textuais em espanhol", tx:"O ENEM apresenta cronicas, noticias, charges e poemas em espanhol. Identifique o genero e o proposito comunicativo de cada texto.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+generos+textuais"},
+  {t:"Inferencia de vocabulario pelo contexto", tx:"Voce nao precisa saber toda palavra - aprenda a inferir pelo contexto. Resolva questoes do ENEM sem usar dicionario.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+inferencia+vocabulario"},
+  {t:"Verbos e tempos verbais", tx:"Identificar o tempo verbal muda o sentido do texto. Pratique com questoes que pedem o significado de verbos conjugados.", u:"https://www.youtube.com/@Descomplica/search?query=espanhol+verbos+enem"},
+  {t:"Ironias e figuras de linguagem", tx:"Charges e tirinhas em espanhol usam ironia, metafora e humor. Resolva questoes do ENEM com recursos estilisticos.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+ironia+enem"},
+  {t:"Variantes do espanhol", tx:"O ENEM usa textos de varios paises. Conheca diferencas entre o espanhol da Espanha, Mexico, Argentina e Cuba.", u:"https://www.youtube.com/@Descomplica/search?query=espanhol+variantes+enem"},
+  {t:"Texto cientifico em espanhol", tx:"Textos cientificos aparecem no ENEM em espanhol. Pratique questoes que misturam vocabulario cientifico com argumentacao.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+texto+cientifico"},
+  {t:"Texto literario - poesia e conto", tx:"Garcia Marquez, Neruda e Borges aparecem no ENEM. Leia um trecho curto e responda questoes de interpretacao.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+poesia+conto+enem"},
+  {t:"Discurso direto e indireto", tx:"Saber distinguir o que o autor diz e o que ele cita e fundamental. Resolva questoes sobre discurso direto e indireto em espanhol.", u:"https://www.youtube.com/@Descomplica/search?query=espanhol+discurso+direto+enem"},
+  {t:"Anuncios e publicidade em espanhol", tx:"Identifique o publico-alvo, o objetivo e os recursos persuasivos de anuncios em espanhol.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+publicidade+enem"},
+  {t:"Intertextualidade em espanhol", tx:"O ENEM adora cruzar textos. Resolva questoes em que um texto em espanhol dialoga com imagem, charge ou outro texto.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+intertextualidade"},
+  {t:"Texto politico e jornalistico", tx:"Textos sobre democracia, direitos humanos e meio ambiente em espanhol. Pratique com questoes de provas anteriores.", u:"https://www.youtube.com/@Descomplica/search?query=espanhol+texto+jornalistico+enem"},
+  {t:"Simulado completo: 5 questoes", tx:"Faca um simulado com 5 questoes de espanhol do ENEM de anos anteriores com tempo de 20 minutos. Corrija e anote os erros.", u:"https://www.youtube.com/@professornoslen/search?query=simulado+espanhol+enem"},
+  {t:"Estrategias para gabaritar espanhol", tx:"Tecnicas para resolver qualquer questao mesmo sem falar o idioma: cognatos, contexto, estrutura textual e eliminacao.", u:"https://www.youtube.com/@professornoslen/search?query=estrategia+espanhol+enem"},
+  {t:"Revisao final: questoes dificeis", tx:"Resolva as questoes de espanhol mais dificeis das ultimas edicoes. Foco em ironia, metafora e vocabulario tecnico.", u:"https://www.youtube.com/@professornoslen/search?query=espanhol+questoes+dificeis+enem"},
+  {t:"Gabarito comentado ENEM 2024", tx:"Assista a correcao completa das questoes de espanhol do ENEM mais recente e compare com as suas respostas.", u:"https://www.youtube.com/@professornoslen/search?query=gabarito+espanhol+enem+2024"}
 ];
 
-// Temas de redação por semana (sexta-feira)
-const REDACAO_TEMAS = [
-  { tema:"Como não zerar na redação do ENEM", instrucao:"Esta semana é especial: antes de qualquer conteúdo, entenda as 5 competências e os erros que zeram a prova. Depois escreva um parágrafo de introdução sobre um tema social que você conheça.", link:"https://www.youtube.com/results?search_query=como+nao+zerar+redacao+enem+competencias" },
-  { tema:"Tecnologia e desigualdade no Brasil", instrucao:"Redação dissertativo-argumentativa: discuta como a falta de acesso à tecnologia aprofunda desigualdades. Inclua proposta de intervenção com os 5 elementos obrigatórios.", link:"https://www.youtube.com/results?search_query=tecnologia+desigualdade+brasil+redacao+enem" },
-  { tema:"Impactos da urbanização nas populações periféricas", instrucao:"Escreva sobre os desafios de quem vive nas periferias das grandes cidades. Use dados reais e conecte com direitos humanos.", link:"https://www.youtube.com/results?search_query=urbanizacao+periferia+redacao+enem" },
-  { tema:"A crise ambiental e a responsabilidade coletiva", instrucao:"Aborde a destruição dos biomas brasileiros e o papel do Estado, da sociedade e dos indivíduos na preservação ambiental.", link:"https://www.youtube.com/results?search_query=crise+ambiental+responsabilidade+redacao+enem" },
-  { tema:"Fake news e desinformação na era digital", instrucao:"Discuta como a disseminação de notícias falsas ameaça a democracia e a saúde pública. Proponha soluções concretas.", link:"https://www.youtube.com/results?search_query=fake+news+desinformacao+redacao+enem+2026" },
-  { tema:"O legado da escravidão e o racismo estrutural", instrucao:"Reflita sobre como a escravidão ainda molda as desigualdades raciais no Brasil de hoje. Conecte história com atualidade.", link:"https://www.youtube.com/results?search_query=racismo+estrutural+legado+escravidao+redacao+enem" },
-  { tema:"Acesso à educação como direito fundamental", instrucao:"Escreva sobre os obstáculos que impedem jovens de concluir os estudos no Brasil e proponha políticas públicas eficazes.", link:"https://www.youtube.com/results?search_query=acesso+educacao+direito+fundamental+redacao+enem" },
-  { tema:"A química dos alimentos e os riscos à saúde", instrucao:"Discuta o uso de agrotóxicos, ultraprocessados e seus impactos na saúde da população mais pobre.", link:"https://www.youtube.com/results?search_query=quimica+alimentos+agrotoxicos+saude+redacao+enem" },
-  { tema:"Biotecnologia: avanços e limites éticos", instrucao:"Aborde o potencial e os riscos da edição genética (CRISPR) e dos transgênicos para a sociedade. Inclua perspectiva ética.", link:"https://www.youtube.com/results?search_query=biotecnologia+etica+crispr+redacao+enem" },
-  { tema:"A invisibilidade dos grupos marginalizados na mídia", instrucao:"Escreva sobre como a mídia representa (ou ignora) grupos vulneráveis e os impactos dessa invisibilidade.", link:"https://www.youtube.com/results?search_query=invisibilidade+grupos+marginalizados+midia+redacao+enem" },
-  { tema:"O papel do Estado na garantia de direitos sociais", instrucao:"Discuta se o Estado brasileiro tem cumprido seu dever de garantir saúde, educação e segurança a todos os cidadãos.", link:"https://www.youtube.com/results?search_query=estado+direitos+sociais+redacao+enem" },
-  { tema:"A violência urbana e a vulnerabilidade da juventude", instrucao:"Reflita sobre como a violência afeta desproporcionalmente jovens negros e periféricos. Proponha soluções que respeitam direitos humanos.", link:"https://www.youtube.com/results?search_query=violencia+urbana+juventude+negra+redacao+enem" },
-  { tema:"Envelhecimento da população: desafios para o Brasil", instrucao:"Aborde os impactos do envelhecimento demográfico na previdência, saúde e mercado de trabalho. (Este foi o tema do ENEM 2025 — treine para dominar!)", link:"https://www.youtube.com/results?search_query=envelhecimento+populacao+redacao+enem+2025" },
-  { tema:"A regulamentação das apostas esportivas no Brasil", instrucao:"Discuta os impactos sociais das bets: endividamento, vício e impacto em famílias vulneráveis. Proponha regulamentação eficaz.", link:"https://www.youtube.com/results?search_query=apostas+esportivas+bets+regulamentacao+redacao+enem+2026" },
-  { tema:"O lugar da literatura na formação do cidadão", instrucao:"Argumente sobre a importância da leitura literária para o desenvolvimento crítico e empático das pessoas.", link:"https://www.youtube.com/results?search_query=literatura+formacao+cidadao+redacao+enem" },
-  { tema:"Simulado de redação: escolha livre", instrucao:"Escolha qualquer tema desta lista e escreva uma redação completa em 50 minutos. Use tudo que aprendeu nas 15 semanas anteriores.", link:"https://www.youtube.com/results?search_query=simulado+redacao+enem+nota+1000+pratica" },
-  { tema:"Inclusão de pessoas neurodivergentes", instrucao:"Escreva sobre os desafios enfrentados por pessoas com autismo, TDAH e outras condições no ambiente escolar e de trabalho.", link:"https://www.youtube.com/results?search_query=neurodiversidade+inclusao+redacao+enem+2026" },
-  { tema:"Revisão final: redação nota 1000", instrucao:"Releia suas melhores redações das últimas semanas. Escolha uma para reescrever do zero aplicando todas as correções. Objetivo: nota máxima.", link:"https://www.youtube.com/results?search_query=redacao+nota+1000+enem+revisao+final+dicas" },
+var RED = [
+  {t:"Como NAO zerar na redacao do ENEM", i:"AULA ESPECIAL: entenda as 5 competencias e os erros que zeram a prova. Escreva 5 linhas de introducao sobre tecnologia e juventude garantindo que nenhum erro zero esteja presente.", u:"https://www.youtube.com/watch?v=2ukOzhZhKrQ"},
+  {t:"Tecnologia e desigualdade no Brasil", i:"Discuta como a falta de acesso a tecnologia aprofunda desigualdades. Inclua proposta com os 5 elementos obrigatorios.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+tecnologia+desigualdade+enem"},
+  {t:"Urbanizacao e exclusao das periferias", i:"Escreva sobre os desafios de quem vive na periferia. Use dados reais e conecte com direitos humanos.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+urbanizacao+periferia"},
+  {t:"A crise ambiental e a responsabilidade coletiva", i:"Aborde a destruicao dos biomas brasileiros. Mostre o papel do Estado, da sociedade e dos individuos.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+crise+ambiental"},
+  {t:"Fake news e desinformacao", i:"Como a desinformacao ameaca a democracia? Proponha solucoes concretas com dados reais.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+fake+news+enem"},
+  {t:"O legado da escravidao e o racismo estrutural", i:"Conecte historia com atualidade: como a escravidao ainda molda as desigualdades raciais no Brasil?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+racismo+estrutural"},
+  {t:"Acesso a educacao como direito fundamental", i:"Quais obstaculos impedem jovens de concluir os estudos? Proponha politicas publicas eficazes.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+educacao+direito"},
+  {t:"Quimica dos alimentos e riscos a saude", i:"Agrotoxicos e ultraprocessados: quais os impactos na saude da populacao mais pobre?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+quimica+alimentos+saude"},
+  {t:"Biotecnologia: avancos e limites eticos", i:"CRISPR, transgenicos e vacinas: qual o limite etico das intervencoes geneticas?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+biotecnologia+etica"},
+  {t:"Invisibilidade dos grupos marginalizados", i:"Como a midia representa ou ignora grupos vulneraveis? Quais os impactos dessa invisibilidade?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+invisibilidade+midia"},
+  {t:"O papel do Estado nos direitos sociais", i:"O Estado brasileiro tem cumprido seu dever de garantir saude, educacao e seguranca a todos?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+estado+direitos+sociais"},
+  {t:"Violencia urbana e vulnerabilidade da juventude", i:"A violencia afeta desproporcionalmente jovens negros e perifericos. Proponha solucoes que respeitam direitos humanos.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+violencia+urbana+juventude"},
+  {t:"Envelhecimento da populacao (ENEM 2025)", i:"Tema do ENEM 2025 - domine! Aborde previdencia, saude e mercado de trabalho no contexto demografico.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+envelhecimento+populacao"},
+  {t:"Apostas esportivas (bets) e impacto social", i:"Endividamento, vicio e impacto em familias vulneraveis: como regular as bets no Brasil?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+apostas+esportivas+bets"},
+  {t:"Literatura na formacao do cidadao", i:"A leitura literaria forma cidadaos criticos e empaticos. Argumente sobre sua importancia nas escolas publicas.", u:"https://www.youtube.com/@professornoslen/search?query=redacao+literatura+formacao"},
+  {t:"Simulado livre - tema a sua escolha", i:"Escolha qualquer tema e escreva uma redacao completa em 50 minutos. Use tudo que aprendeu.", u:"https://www.youtube.com/@Descomplica/search?query=simulado+redacao+enem"},
+  {t:"Inclusao de pessoas neurodivergentes", i:"Autismo, TDAH e outras condicoes: quais os desafios no ambiente escolar e de trabalho?", u:"https://www.youtube.com/@Descomplica/search?query=redacao+neurodiversidade+inclusao"},
+  {t:"Revisao final - redacao nota 1000", i:"Releia suas melhores redacoes. Reescreva a melhor do zero com todas as correcoes. Objetivo: nota maxima.", u:"https://www.youtube.com/@Descomplica/search?query=redacao+nota+1000+revisao+final"}
 ];
 
-const SEMANAS = [
-  {
-    num:1, tema:"Linguagens — Interpretação de Texto", emoji:"📖",
-    dias:[
-      { dia:"Seg", foco:"Gêneros Textuais + Como NÃO Zerar na Redação",
-        videos:[
-          {titulo:"Como NÃO zerar na redação do ENEM", canal:"Redação Top", dur:"15 min", emoji:"✍️", url:"https://www.youtube.com/results?search_query=como+nao+zerar+redacao+enem+competencias+redacao+top"},
-          {titulo:"Gêneros Textuais para o ENEM", canal:"Descomplica", dur:"14 min", emoji:"📖", url:"https://www.youtube.com/results?search_query=generos+textuais+enem+descomplica"},
-          {titulo:"As 5 competências da redação ENEM explicadas", canal:"Me Salva", dur:"13 min", emoji:"🎯", url:"https://www.youtube.com/results?search_query=5+competencias+redacao+enem+me+salva"},
-        ],
-        atividade:"Leia um HQ, um meme e uma notícia — qual é o objetivo de cada um?", atividadeUrl:"https://www.youtube.com/results?search_query=generos+textuais+hq+meme+noticia+escola",
-        extra: { tipo:"exercicio", titulo:"Exercício prático: Mapeie os 5 zeros", instrucao:"Liste os 5 motivos que zeram a redação do ENEM e escreva um exemplo do que NÃO fazer em cada um. Depois, escreva 5 linhas de introdução sobre 'tecnologia e juventude' garantindo que nenhum erro zero está presente.", link:"https://www.youtube.com/results?search_query=erros+que+zeram+redacao+enem+exemplos" },
-        desafio:"Encontre 3 gêneros textuais diferentes no seu celular hoje"
-      },
-      { dia:"Ter", foco:"Funções da Linguagem",
-        videos:[
-          {titulo:"Funções da Linguagem", canal:"Parabólica", dur:"14 min", emoji:"🗣️", url:"https://www.youtube.com/results?search_query=funcoes+da+linguagem+parabolica+enem"},
-          {titulo:"Funções da Linguagem com memes", canal:"Stoodi", dur:"13 min", emoji:"😂", url:"https://www.youtube.com/results?search_query=funcoes+linguagem+memes+stoodi+enem"},
-          {titulo:"Questões comentadas: Funções da Linguagem", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+funcoes+linguagem+enem"},
-        ],
-        atividade:"Crie um meme para cada função da linguagem", atividadeUrl:"https://www.youtube.com/results?search_query=funcoes+linguagem+memes+atividade+escola",
-        desafio:"Crie um meme usando a função poética da linguagem"
-      },
-      { dia:"Qua", foco:"Figuras de Linguagem",
-        videos:[
-          {titulo:"Figuras de Linguagem com músicas", canal:"Descomplica", dur:"15 min", emoji:"🎵", url:"https://www.youtube.com/results?search_query=figuras+de+linguagem+musicas+descomplica+enem"},
-          {titulo:"Metáfora, Hipérbole, Ironia e mais", canal:"Parabólica", dur:"14 min", emoji:"🔤", url:"https://www.youtube.com/results?search_query=metafora+hiperbole+ironia+parabolica+enem"},
-          {titulo:"Questões resolvidas: Figuras de Linguagem", canal:"Me Salva", dur:"12 min", emoji:"✅", url:"https://www.youtube.com/results?search_query=questoes+figuras+linguagem+enem+me+salva"},
-        ],
-        atividade:"Analise letras de músicas e identifique as figuras de linguagem", atividadeUrl:"https://www.youtube.com/results?search_query=figuras+linguagem+letras+musica+atividade+escola",
-        desafio:"Encontre 5 figuras de linguagem em uma música que você gosta"
-      },
-      { dia:"Qui", foco:"Interpretação de Texto & Intertextualidade",
-        videos:[
-          {titulo:"Interpretação de Texto no ENEM", canal:"Me Salva", dur:"16 min", emoji:"🔍", url:"https://www.youtube.com/results?search_query=interpretacao+texto+enem+me+salva"},
-          {titulo:"Intertextualidade — como identificar", canal:"Descomplica", dur:"13 min", emoji:"🔗", url:"https://www.youtube.com/results?search_query=intertextualidade+enem+descomplica"},
-          {titulo:"Simulado comentado: interpretação de texto", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+interpretacao+texto+enem"},
-        ],
-        atividade:"Resolva 5 questões de interpretação do ENEM em dupla", atividadeUrl:"https://www.youtube.com/results?search_query=questoes+interpretacao+texto+enem+resolvidas",
-        desafio:"Troque as respostas com o colega e discutam os erros juntos"
-      },
-      { dia:"Sex", foco:"Revisão + Redação Semanal ✍️",
-        videos:[
-          {titulo:"Wall-E — linguagem visual sem palavras (abertura)", canal:"Cinema Educativo", dur:"8 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=wall-e+cena+abertura+linguagem+visual"},
-          {titulo:"Revisão Geral: Linguagens Semana 1", canal:"Parabólica", dur:"20 min", emoji:"📚", url:"https://www.youtube.com/results?search_query=revisao+linguagens+enem+semana+resumo"},
-          {titulo:"Como escrever a introdução perfeita", canal:"Redação Top", dur:"15 min", emoji:"✍️", url:"https://www.youtube.com/results?search_query=introducao+perfeita+redacao+enem+redacao+top"},
-        ],
-        atividade:"Assista Wall-E e debata: como a linguagem visual transmite emoção?", atividadeUrl:"https://www.youtube.com/results?search_query=wall-e+linguagem+visual+debate+educativo",
-        desafio:"Escreva um parágrafo de introdução sobre tecnologia sem usar 'Desde os primórdios'"
-      },
-    ]
-  },
-  {
-    num:2, tema:"Matemática — Funções", emoji:"📐",
-    dias:[
-      { dia:"Seg", foco:"Função do 1º Grau",
-        videos:[
-          {titulo:"Função Afim do zero", canal:"Prof. Ferretto", dur:"15 min", emoji:"📈", url:"https://www.youtube.com/results?search_query=funcao+afim+ferretto+enem"},
-          {titulo:"Gráfico da Função do 1º Grau", canal:"Descomplica", dur:"12 min", emoji:"📉", url:"https://www.youtube.com/results?search_query=grafico+funcao+1+grau+descomplica+enem"},
-          {titulo:"Questões ENEM: Função do 1º Grau", canal:"Me Salva", dur:"15 min", emoji:"✅", url:"https://www.youtube.com/results?search_query=questoes+enem+funcao+primeiro+grau+me+salva"},
-        ],
-        atividade:"Calcule quanto ganharia trabalhando X horas a diferentes salários", atividadeUrl:"https://www.youtube.com/results?search_query=funcao+1+grau+cotidiano+salario+atividade",
-        desafio:"Monte uma tabela com 5 situações do dia a dia usando função afim"
-      },
-      { dia:"Ter", foco:"Função do 2º Grau",
-        videos:[
-          {titulo:"Função Quadrática", canal:"Descomplica", dur:"15 min", emoji:"⛰️", url:"https://www.youtube.com/results?search_query=funcao+quadratica+descomplica+enem"},
-          {titulo:"Vértice e Raízes da Parábola", canal:"Me Salva", dur:"14 min", emoji:"📐", url:"https://www.youtube.com/results?search_query=vertice+raizes+parabola+me+salva+enem"},
-          {titulo:"Questões ENEM: Função Quadrática", canal:"Prof. Ferretto", dur:"13 min", emoji:"✅", url:"https://www.youtube.com/results?search_query=questoes+enem+funcao+quadratica+ferretto"},
-        ],
-        atividade:"Jogo 'lança a bolinha' — quem faz a maior parábola?", atividadeUrl:"https://www.youtube.com/results?search_query=parabola+funcao+quadratica+experimento+escola",
-        desafio:"Desenhe uma parábola e marque corretamente vértice e raízes"
-      },
-      { dia:"Qua", foco:"Função Exponencial",
-        videos:[
-          {titulo:"Função Exponencial", canal:"Matemática Rio", dur:"14 min", emoji:"🚀", url:"https://www.youtube.com/results?search_query=funcao+exponencial+matematica+rio+enem"},
-          {titulo:"Crescimento Exponencial no cotidiano", canal:"Descomplica", dur:"13 min", emoji:"📱", url:"https://www.youtube.com/results?search_query=crescimento+exponencial+cotidiano+descomplica"},
-          {titulo:"Exponencial no ENEM: juros e vírus", canal:"Me Salva", dur:"15 min", emoji:"🦠", url:"https://www.youtube.com/results?search_query=funcao+exponencial+enem+juros+virus+me+salva"},
-        ],
-        atividade:"Simule o crescimento de seguidores mês a mês em uma planilha", atividadeUrl:"https://www.youtube.com/results?search_query=crescimento+exponencial+redes+sociais+atividade",
-        desafio:"Dobre um papel 10 vezes e estime a altura final"
-      },
-      { dia:"Qui", foco:"Função Logarítmica",
-        videos:[
-          {titulo:"Logaritmos do zero", canal:"Prof. Ferretto", dur:"15 min", emoji:"🔊", url:"https://www.youtube.com/results?search_query=logaritmos+ferretto+enem+zero"},
-          {titulo:"Log na prática: decibéis e escala Richter", canal:"Descomplica", dur:"13 min", emoji:"🌋", url:"https://www.youtube.com/results?search_query=logaritmo+decibeis+escala+richter+enem"},
-          {titulo:"5 questões de Logaritmo ENEM", canal:"Me Salva", dur:"14 min", emoji:"✅", url:"https://www.youtube.com/results?search_query=questoes+logaritmo+enem+me+salva"},
-        ],
-        atividade:"Entenda como o volume do som é medido em decibéis", atividadeUrl:"https://www.youtube.com/results?search_query=logaritmo+volume+som+decibeis+atividade",
-        desafio:"Resolva 5 questões de log do ENEM contra o cronômetro (20 min)"
-      },
-      { dia:"Sex", foco:"Revisão + Redação Semanal ✍️",
-        videos:[
-          {titulo:"Numb3rs — matemática na vida real", canal:"Série TV", dur:"20 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=numb3rs+matematica+serie+educativo"},
-          {titulo:"Revisão completa: todas as funções", canal:"Me Salva", dur:"20 min", emoji:"📚", url:"https://www.youtube.com/results?search_query=revisao+funcoes+matematica+enem+me+salva"},
-        ],
-        atividade:"Kahoot ou quiz sobre funções — quem acerta mais ganha estrela!", atividadeUrl:"https://kahoot.com/",
-        desafio:"Crie 2 questões de funções para desafiar os colegas"
-      },
-    ]
-  },
-  {
-    num:3, tema:"Ciências Humanas — Geografia", emoji:"🌍",
-    dias:[
-      { dia:"Seg", foco:"Globalização",
-        videos:[
-          {titulo:"Globalização para o ENEM", canal:"Parabólica", dur:"15 min", emoji:"🌐", url:"https://www.youtube.com/results?search_query=globalizacao+enem+parabolica"},
-          {titulo:"Globalização e Desigualdades", canal:"Descomplica", dur:"14 min", emoji:"📊", url:"https://www.youtube.com/results?search_query=globalizacao+desigualdades+descomplica+enem"},
-          {titulo:"Questões ENEM: Globalização", canal:"Se Liga Nessa História", dur:"13 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+globalizacao+enem"},
-        ],
-        atividade:"Rastreie a origem de 10 produtos do seu dia a dia no mapa", atividadeUrl:"https://www.youtube.com/results?search_query=globalizacao+origem+produtos+atividade",
-        desafio:"Liste 10 itens com países de origem diferentes"
-      },
-      { dia:"Ter", foco:"Espaço Urbano & Periferias",
-        videos:[
-          {titulo:"Urbanização no Brasil", canal:"Geoblog", dur:"14 min", emoji:"🏙️", url:"https://www.youtube.com/results?search_query=urbanizacao+brasil+enem+geoblog"},
-          {titulo:"Favelas e segregação urbana", canal:"Me Salva", dur:"15 min", emoji:"🏘️", url:"https://www.youtube.com/results?search_query=favelas+periferia+segregacao+enem+me+salva"},
-          {titulo:"Questões ENEM: Espaço Urbano", canal:"Se Liga Nessa História", dur:"13 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+espaco+urbano+enem"},
-        ],
-        atividade:"Compare fotos do centro e da periferia da sua cidade", atividadeUrl:"https://www.youtube.com/results?search_query=espaco+urbano+periferia+centro+cidade+atividade",
-        desafio:"Desenhe um mapa mental sobre desigualdade urbana"
-      },
-      { dia:"Qua", foco:"Biomas Brasileiros",
-        videos:[
-          {titulo:"Biomas Brasileiros", canal:"Parabólica", dur:"15 min", emoji:"🌿", url:"https://www.youtube.com/results?search_query=biomas+brasileiros+parabolica+enem"},
-          {titulo:"Desmatamento e mudanças climáticas", canal:"Me Salva", dur:"14 min", emoji:"🌱", url:"https://www.youtube.com/results?search_query=desmatamento+mudancas+climaticas+enem+me+salva"},
-          {titulo:"Questões ENEM: Biomas e Meio Ambiente", canal:"Se Liga Nessa História", dur:"13 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+biomas+meio+ambiente"},
-        ],
-        atividade:"Preencha um mapa mudo do Brasil com os biomas", atividadeUrl:"https://www.youtube.com/results?search_query=biomas+brasil+mapa+mudo+atividade+escola",
-        desafio:"Monte um cartaz sobre um bioma ameaçado com propostas de solução"
-      },
-      { dia:"Qui", foco:"População & Migrações",
-        videos:[
-          {titulo:"Migrações Internas no Brasil", canal:"Descomplica", dur:"14 min", emoji:"✈️", url:"https://www.youtube.com/results?search_query=migracoes+internas+brasil+descomplica+enem"},
-          {titulo:"Transição Demográfica", canal:"Me Salva", dur:"13 min", emoji:"👥", url:"https://www.youtube.com/results?search_query=transicao+demografica+enem+me+salva"},
-          {titulo:"Questões ENEM: População", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+populacao+enem"},
-        ],
-        atividade:"Pesquise de onde vieram as famílias da turma e crie um gráfico", atividadeUrl:"https://www.youtube.com/results?search_query=migracoes+brasil+origem+familia+atividade+escola",
-        desafio:"Crie um gráfico de barras com as origens da turma"
-      },
-      { dia:"Sex", foco:"Revisão + Redação Semanal ✍️",
-        videos:[
-          {titulo:"A Última Floresta — trailer (documentário)", canal:"Cinema", dur:"5 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=a+ultima+floresta+2021+trailer"},
-          {titulo:"Revisão Completa: Geografia ENEM", canal:"Parabólica", dur:"20 min", emoji:"📚", url:"https://www.youtube.com/results?search_query=revisao+geografia+enem+parabolica"},
-          {titulo:"Questões comentadas: biomas e urbanização", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+biomas+urbanizacao+questoes"},
-        ],
-        atividade:"Assista 'A Última Floresta' e debata impactos ambientais", atividadeUrl:"https://www.youtube.com/results?search_query=a+ultima+floresta+documentario+debate",
-        desafio:"Escreva 5 linhas: 'O que aprendi sobre o Brasil hoje'"
-      },
-    ]
-  },
-  {
-    num:4, tema:"Ciências da Natureza — Ecologia", emoji:"🌱",
-    dias:[
-      { dia:"Seg", foco:"Cadeias & Teias Alimentares",
-        videos:[
-          {titulo:"Cadeia Alimentar", canal:"Biologia Total", dur:"14 min", emoji:"🦁", url:"https://www.youtube.com/results?search_query=cadeia+alimentar+biologia+total+enem"},
-          {titulo:"Teia Alimentar e Níveis Tróficos", canal:"Me Salva", dur:"13 min", emoji:"🕸️", url:"https://www.youtube.com/results?search_query=teia+alimentar+niveis+troficos+me+salva+enem"},
-          {titulo:"Questões ENEM: Ecologia", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+ecologia+enem"},
-        ],
-        atividade:"Monte uma cadeia alimentar com recortes de revista em grupo", atividadeUrl:"https://www.youtube.com/results?search_query=cadeia+alimentar+atividade+recorte+escola",
-        desafio:"Quem montar a cadeia mais completa e correta da turma vence!"
-      },
-      { dia:"Ter", foco:"Ciclos Biogeoquímicos",
-        videos:[
-          {titulo:"Ciclo da Água", canal:"Me Salva", dur:"13 min", emoji:"💧", url:"https://www.youtube.com/results?search_query=ciclo+da+agua+me+salva+enem"},
-          {titulo:"Ciclo do Carbono e Nitrogênio", canal:"Parabólica", dur:"15 min", emoji:"🌡️", url:"https://www.youtube.com/results?search_query=ciclo+carbono+nitrogenio+parabolica+enem"},
-          {titulo:"Experimento do ciclo da água em casa", canal:"Ciência na Escola", dur:"14 min", emoji:"🔬", url:"https://www.youtube.com/results?search_query=experimento+ciclo+agua+evaporacao+escola"},
-        ],
-        atividade:"Reproduza o ciclo da água com recipiente e plástico filme", atividadeUrl:"https://www.youtube.com/results?search_query=ciclo+agua+experimento+caseiro+escola",
-        desafio:"Desenhe o ciclo do carbono do zero sem consultar nada"
-      },
-      { dia:"Qua", foco:"Relações Ecológicas",
-        videos:[
-          {titulo:"Relações Ecológicas", canal:"Prof. Guilherme", dur:"14 min", emoji:"🤝", url:"https://www.youtube.com/results?search_query=relacoes+ecologicas+professor+guilherme+enem"},
-          {titulo:"Mutualismo, Parasitismo, Comensalismo", canal:"Descomplica", dur:"13 min", emoji:"🦟", url:"https://www.youtube.com/results?search_query=mutualismo+parasitismo+comensalismo+descomplica+enem"},
-          {titulo:"Questões ENEM: Relações Ecológicas", canal:"Se Liga Nessa História", dur:"14 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+relacoes+ecologicas"},
-        ],
-        atividade:"Associe relações ecológicas a situações reais do colégio!", atividadeUrl:"https://www.youtube.com/results?search_query=relacoes+ecologicas+cotidiano+escola+atividade",
-        desafio:"Identifique 3 relações ecológicas reais no seu bairro"
-      },
-      { dia:"Qui", foco:"Problemas Ambientais",
-        videos:[
-          {titulo:"Problemas Ambientais", canal:"Stoodi", dur:"14 min", emoji:"🏭", url:"https://www.youtube.com/results?search_query=problemas+ambientais+enem+stoodi"},
-          {titulo:"Aquecimento global e efeito estufa", canal:"Me Salva", dur:"13 min", emoji:"🌡️", url:"https://www.youtube.com/results?search_query=aquecimento+global+efeito+estufa+enem+me+salva"},
-          {titulo:"Soluções ambientais para comunidades", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+problemas+ambientais"},
-        ],
-        atividade:"Debate: o que nossa comunidade pode fazer pelo meio ambiente?", atividadeUrl:"https://www.youtube.com/results?search_query=problemas+ambientais+debate+solucoes+escola",
-        desafio:"Escreva uma proposta de intervenção ambiental para a sua redação"
-      },
-      { dia:"Sex", foco:"Revisão + Redação Semanal ✍️",
-        videos:[
-          {titulo:"O Lorax — cenas sobre meio ambiente", canal:"Cinema Educativo", dur:"12 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=o+lorax+cenas+meio+ambiente+ecologia"},
-          {titulo:"Revisão Ecologia ENEM", canal:"Biologia Total", dur:"15 min", emoji:"📚", url:"https://www.youtube.com/results?search_query=revisao+ecologia+enem+biologia+total"},
-          {titulo:"Top questões de Ecologia", canal:"Se Liga Nessa História", dur:"15 min", emoji:"🎬", url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+ecologia+questoes+enem"},
-        ],
-        atividade:"Assista trechos de 'O Lorax' e conecte com os temas da semana", atividadeUrl:"https://www.youtube.com/results?search_query=o+lorax+ecologia+debate+escola",
-        desafio:"Liste 5 problemas ecológicos presentes no filme"
-      },
-    ]
-  },
-  {
-    num:5, tema:"Matemática — Estatística & Probabilidade", emoji:"📊",
-    dias:[
-      { dia:"Seg", foco:"Média, Moda e Mediana", videos:[{titulo:"Média, Moda e Mediana",canal:"Prof. Ferretto",dur:"14 min",emoji:"📊",url:"https://www.youtube.com/results?search_query=media+moda+mediana+ferretto+enem"},{titulo:"Estatística descritiva na prática",canal:"Me Salva",dur:"13 min",emoji:"📈",url:"https://www.youtube.com/results?search_query=estatistica+descritiva+pratica+enem+me+salva"},{titulo:"Questões ENEM: Estatística",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+estatistica+enem"}], atividade:"Calcule média, moda e mediana das notas da turma",atividadeUrl:"https://www.youtube.com/results?search_query=media+moda+mediana+atividade+turma",desafio:"Crie uma pesquisa de opinião e calcule os 3 valores" },
-      { dia:"Ter", foco:"Gráficos e Tabelas", videos:[{titulo:"Leitura de Gráficos no ENEM",canal:"Descomplica",dur:"14 min",emoji:"📉",url:"https://www.youtube.com/results?search_query=leitura+graficos+enem+descomplica"},{titulo:"Tipos de Gráficos",canal:"Me Salva",dur:"13 min",emoji:"📊",url:"https://www.youtube.com/results?search_query=tipos+graficos+enem+me+salva"},{titulo:"Questões com gráficos e tabelas",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+graficos+tabelas+enem"}], atividade:"Leia gráficos de notícias reais e converta tabela em gráfico",atividadeUrl:"https://www.youtube.com/results?search_query=leitura+graficos+noticias+atividade",desafio:"Converta uma tabela de dados reais em gráfico à mão" },
-      { dia:"Qua", foco:"Probabilidade", videos:[{titulo:"Probabilidade",canal:"Prof. Marcos Aba",dur:"15 min",emoji:"🎲",url:"https://www.youtube.com/results?search_query=probabilidade+enem+marcos+aba"},{titulo:"Probabilidade com dados e moedas",canal:"Descomplica",dur:"14 min",emoji:"🪙",url:"https://www.youtube.com/results?search_query=probabilidade+dados+moedas+descomplica+enem"},{titulo:"Questões ENEM: Probabilidade",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+probabilidade+enem"}], atividade:"Lance dados 20 vezes e compare com a teoria",atividadeUrl:"https://www.youtube.com/results?search_query=probabilidade+experimento+dados+escola",desafio:"Calcule a probabilidade de tirar cara 3 vezes seguidas" },
-      { dia:"Qui", foco:"Análise Combinatória", videos:[{titulo:"Análise Combinatória",canal:"Me Salva",dur:"15 min",emoji:"🔢",url:"https://www.youtube.com/results?search_query=analise+combinatoria+enem+me+salva"},{titulo:"Permutação, Combinação e Arranjo",canal:"Prof. Ferretto",dur:"14 min",emoji:"🔀",url:"https://www.youtube.com/results?search_query=permutacao+combinacao+arranjo+ferretto+enem"},{titulo:"Questões ENEM: Análise Combinatória",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+analise+combinatoria"}], atividade:"Quantas senhas de 4 dígitos diferentes é possível criar?",atividadeUrl:"https://www.youtube.com/results?search_query=combinatoria+senhas+atividade+pratica",desafio:"Monte todos os arranjos das letras do seu nome" },
-      { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Moneyball — matemática no esporte (trailer)",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=moneyball+trailer+legendado"},{titulo:"Revisão: Estatística e Probabilidade",canal:"Me Salva",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+estatistica+probabilidade+enem+completo"},{titulo:"Simulado comentado: Estatística ENEM",canal:"Se Liga Nessa História",dur:"17 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+estatistica+simulado"}], atividade:"Mini torneio: quem acerta mais questões de estatística?",atividadeUrl:"https://kahoot.com/",desafio:"Aplique probabilidade em um esporte que a turma gosta" },
-    ]
-  },
-  {
-    num:6, tema:"Ciências Humanas — História do Brasil", emoji:"🏛️",
-    dias:[
-      { dia:"Seg", foco:"Brasil Colônia", videos:[{titulo:"Brasil Colônia",canal:"Parabólica",dur:"15 min",emoji:"⛵",url:"https://www.youtube.com/results?search_query=brasil+colonia+parabolica+enem"},{titulo:"Colonização Portuguesa",canal:"Descomplica",dur:"14 min",emoji:"🗺️",url:"https://www.youtube.com/results?search_query=colonizacao+portuguesa+brasil+descomplica+enem"},{titulo:"Brasil Colônia — questões resolvidas",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+brasil+colonia+enem"}], atividade:"Crie uma linha do tempo ilustrada em grupo",atividadeUrl:"https://www.youtube.com/results?search_query=linha+do+tempo+brasil+colonia+atividade",desafio:"Desenhe a linha do tempo com pelo menos 8 eventos" },
-      { dia:"Ter", foco:"Escravidão & Resistência", videos:[{titulo:"Escravidão no Brasil",canal:"Me Salva",dur:"15 min",emoji:"⛓️",url:"https://www.youtube.com/results?search_query=escravidao+brasil+enem+me+salva"},{titulo:"Quilombos e Resistência Negra",canal:"Parabólica",dur:"14 min",emoji:"✊",url:"https://www.youtube.com/results?search_query=quilombos+resistencia+negra+parabolica+enem"},{titulo:"Escravidão e Abolição — análise ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+escravidao+abolicao+enem"}], atividade:"Pesquise histórias reais de resistência negra no Brasil",atividadeUrl:"https://www.youtube.com/results?search_query=resistencia+negra+quilombos+historia+brasil",desafio:"Escreva 10 linhas sobre uma figura histórica negra brasileira" },
-      { dia:"Qua", foco:"Primeira República", videos:[{titulo:"República Velha",canal:"Descomplica",dur:"14 min",emoji:"☕",url:"https://www.youtube.com/results?search_query=republica+velha+descomplica+enem"},{titulo:"Política do Café com Leite",canal:"Me Salva",dur:"13 min",emoji:"🤝",url:"https://www.youtube.com/results?search_query=cafe+com+leite+politica+me+salva+enem"},{titulo:"Primeira República — questões",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+primeira+republica+enem"}], atividade:"Debate: quem mandava no Brasil na República Velha?",atividadeUrl:"https://www.youtube.com/results?search_query=republica+velha+cafe+com+leite+debate",desafio:"Mapa mental: estrutura de poder na Primeira República" },
-      { dia:"Qui", foco:"Era Vargas", videos:[{titulo:"Era Vargas",canal:"Stoodi",dur:"14 min",emoji:"🏭",url:"https://www.youtube.com/results?search_query=era+vargas+stoodi+enem"},{titulo:"Estado Novo e Populismo",canal:"Descomplica",dur:"13 min",emoji:"📢",url:"https://www.youtube.com/results?search_query=estado+novo+populismo+descomplica+enem"},{titulo:"Era Vargas — análise e questões",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+era+vargas+enem"}], atividade:"Compare Vargas com líderes populistas da atualidade",atividadeUrl:"https://www.youtube.com/results?search_query=vargas+populismo+comparacao+atual+debate",desafio:"Debate: populismo é bom ou ruim para a democracia?" },
-      { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Capitães da Areia — trailer",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=capitaes+da+areia+2011+trailer"},{titulo:"Revisão: História do Brasil",canal:"Parabólica",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+historia+brasil+parabolica+enem"},{titulo:"Questões comentadas: Brasil séc. XIX–XX",canal:"Se Liga Nessa História",dur:"17 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+brasil+seculo+xix+xx+questoes"}], atividade:"Assista 'Capitães da Areia' e debata exclusão social",atividadeUrl:"https://www.youtube.com/results?search_query=capitaes+da+areia+exclusao+social+literatura",desafio:"Conecte o conteúdo do filme com 2 temas da semana" },
-    ]
-  },
-  { num:7, tema:"Física — Cinemática & Energia", emoji:"⚡", dias:[
-    { dia:"Seg", foco:"MRU e MRUV", videos:[{titulo:"Cinemática MRU",canal:"Física e Afins",dur:"14 min",emoji:"🏃",url:"https://www.youtube.com/results?search_query=cinematica+mru+fisica+e+afins+enem"},{titulo:"MRUV e Queda Livre",canal:"Descomplica",dur:"13 min",emoji:"🪂",url:"https://www.youtube.com/results?search_query=mruv+queda+livre+descomplica+enem"},{titulo:"Cinemática no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+cinematica+enem"}], atividade:"Meça sua velocidade correndo no pátio com cronômetro",atividadeUrl:"https://www.youtube.com/results?search_query=velocidade+media+experimento+escola+cinematica",desafio:"Calcule velocidade média, tempo e distância com dados reais" },
-    { dia:"Ter", foco:"Queda Livre & Lançamentos", videos:[{titulo:"Queda Livre",canal:"Mundo da Física",dur:"14 min",emoji:"🎳",url:"https://www.youtube.com/results?search_query=queda+livre+mundo+da+fisica+enem"},{titulo:"Lançamento Oblíquo",canal:"Me Salva",dur:"13 min",emoji:"⚾",url:"https://www.youtube.com/results?search_query=lancamento+obliquo+me+salva+enem"},{titulo:"Lançamentos no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+lancamentos+fisica+enem"}], atividade:"Jogue objetos de alturas diferentes e meça o tempo",atividadeUrl:"https://www.youtube.com/results?search_query=queda+livre+experimento+tempo+escola",desafio:"Resolva 3 questões de lançamento oblíquo do ENEM" },
-    { dia:"Qua", foco:"Trabalho e Energia", videos:[{titulo:"Trabalho e Energia",canal:"Prof. Boaro",dur:"15 min",emoji:"💪",url:"https://www.youtube.com/results?search_query=trabalho+energia+boaro+enem"},{titulo:"Conservação de Energia",canal:"Descomplica",dur:"14 min",emoji:"⚡",url:"https://www.youtube.com/results?search_query=conservacao+energia+descomplica+enem"},{titulo:"Energia no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+energia+mecanica+enem"}], atividade:"Calcule a energia para subir a escada da escola",atividadeUrl:"https://www.youtube.com/results?search_query=trabalho+energia+subir+escada+atividade",desafio:"Monte experimento de conservação de energia com materiais simples" },
-    { dia:"Qui", foco:"Termologia", videos:[{titulo:"Termologia",canal:"Descomplica",dur:"14 min",emoji:"🌡️",url:"https://www.youtube.com/results?search_query=termologia+descomplica+enem"},{titulo:"Condução, Convecção e Irradiação",canal:"Me Salva",dur:"13 min",emoji:"🔥",url:"https://www.youtube.com/results?search_query=conducao+conveccao+irradiacao+me+salva+enem"},{titulo:"Termologia no cotidiano",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+termologia+enem"}], atividade:"Cozinhe algo simples e explique transferência de calor",atividadeUrl:"https://www.youtube.com/results?search_query=transferencia+calor+conducao+conveccao+experimento",desafio:"Explique como funciona uma garrafa térmica" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Homem-Formiga — física quântica nas cenas",canal:"Cinema Educativo",dur:"10 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=ant+man+fisica+quantica+cenas+explicacao"},{titulo:"Revisão Física I — Cinemática e Energia",canal:"Me Salva",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+fisica+cinematica+energia+enem"},{titulo:"Física no ENEM — questões comentadas",canal:"Se Liga Nessa História",dur:"12 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+fisica+questoes+enem"}], atividade:"Identifique conceitos físicos em cenas de filmes",atividadeUrl:"https://www.youtube.com/results?search_query=fisica+filmes+cenas+conceitos+educativo",desafio:"Liste 5 fenômenos físicos no filme escolhido" },
-  ]},
-  { num:8, tema:"Química — Orgânica e Cotidiano", emoji:"🧪", dias:[
-    { dia:"Seg", foco:"Funções Orgânicas", videos:[{titulo:"Funções Orgânicas",canal:"Prof. Boaro",dur:"15 min",emoji:"🧴",url:"https://www.youtube.com/results?search_query=funcoes+organicas+boaro+enem"},{titulo:"Funções Orgânicas no cotidiano",canal:"Me Salva",dur:"14 min",emoji:"🏠",url:"https://www.youtube.com/results?search_query=funcoes+organicas+cotidiano+me+salva+enem"},{titulo:"Química Orgânica no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+quimica+organica+enem"}], atividade:"Identifique compostos orgânicos em produtos de casa",atividadeUrl:"https://www.youtube.com/results?search_query=funcoes+organicas+cotidiano+atividade+pratica",desafio:"Liste 5 compostos orgânicos de casa com a função química" },
-    { dia:"Ter", foco:"Reações Orgânicas", videos:[{titulo:"Reações Orgânicas",canal:"Me Salva",dur:"14 min",emoji:"🔄",url:"https://www.youtube.com/results?search_query=reacoes+organicas+enem+me+salva"},{titulo:"Saponificação — como o sabão é feito",canal:"Descomplica",dur:"13 min",emoji:"🧼",url:"https://www.youtube.com/results?search_query=saponificacao+sabao+descomplica+quimica"},{titulo:"Experimento: fabricar sabão",canal:"Ciência na Escola",dur:"15 min",emoji:"🔬",url:"https://www.youtube.com/results?search_query=sabao+caseiro+saponificacao+experimento+escola"}], atividade:"Fabrique sabão caseiro e explique a saponificação",atividadeUrl:"https://www.youtube.com/results?search_query=sabao+caseiro+experimento+escola",desafio:"Registre as etapas em fotos ou desenhos para apresentar" },
-    { dia:"Qua", foco:"Ligações Químicas", videos:[{titulo:"Ligações Químicas",canal:"Parabólica",dur:"14 min",emoji:"🔗",url:"https://www.youtube.com/results?search_query=ligacoes+quimicas+parabolica+enem"},{titulo:"Iônica, Covalente e Metálica",canal:"Descomplica",dur:"13 min",emoji:"⚗️",url:"https://www.youtube.com/results?search_query=ligacoes+ionica+covalente+metalica+descomplica"},{titulo:"Ligações Químicas no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+ligacoes+quimicas+enem"}], atividade:"Monte modelos 3D de moléculas com massinha de modelar",atividadeUrl:"https://www.youtube.com/results?search_query=moleculas+3d+massinha+ligacoes+quimicas",desafio:"Construa água, sal e açúcar em 3D e explique cada ligação" },
-    { dia:"Qui", foco:"Estequiometria", videos:[{titulo:"Estequiometria",canal:"Descomplica",dur:"15 min",emoji:"⚖️",url:"https://www.youtube.com/results?search_query=estequiometria+descomplica+enem"},{titulo:"Cálculos Estequiométricos na prática",canal:"Me Salva",dur:"14 min",emoji:"🔢",url:"https://www.youtube.com/results?search_query=calculos+estequiometricos+pratica+me+salva"},{titulo:"Estequiometria no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+estequiometria+enem"}], atividade:"Calcule ingredientes para fazer bolo para toda a turma",atividadeUrl:"https://www.youtube.com/results?search_query=estequiometria+receita+bolo+atividade",desafio:"Resolva 5 questões de estequiometria do ENEM" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Vulcão de bicarbonato: ácido-base na prática",canal:"Ciência na Escola",dur:"8 min",emoji:"🌋",url:"https://www.youtube.com/results?search_query=vulcao+bicarbonato+vinagre+experimento+acido+base"},{titulo:"Revisão Química Orgânica ENEM",canal:"Me Salva",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+quimica+organica+enem"},{titulo:"Top questões de Química ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+quimica+questoes+enem"}], atividade:"Faça o vulcão de bicarbonato e explique a reação",atividadeUrl:"https://www.youtube.com/results?search_query=vulcao+bicarbonato+escola+experimento",desafio:"Grave um mini-vídeo (1 min) explicando uma reação química" },
-  ]},
-  { num:9, tema:"Biologia — Genética e Evolução", emoji:"🧬", dias:[
-    { dia:"Seg", foco:"DNA e Hereditariedade", videos:[{titulo:"DNA e Replicação",canal:"Biologia Total",dur:"14 min",emoji:"🧬",url:"https://www.youtube.com/results?search_query=dna+replicacao+biologia+total+enem"},{titulo:"Extração de DNA do morango",canal:"Ciência na Escola",dur:"13 min",emoji:"🍓",url:"https://www.youtube.com/results?search_query=extracao+dna+morango+experimento"},{titulo:"Genética no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+genetica+enem"}], atividade:"Extraia DNA de morango com água, detergente e álcool",atividadeUrl:"https://www.youtube.com/results?search_query=extracao+dna+morango+escola",desafio:"Monte um modelo de DNA com macarrão e balinhas" },
-    { dia:"Ter", foco:"Leis de Mendel", videos:[{titulo:"1ª Lei de Mendel",canal:"Biologia Total",dur:"14 min",emoji:"🌱",url:"https://www.youtube.com/results?search_query=primeira+lei+mendel+biologia+total"},{titulo:"2ª Lei e Quadro de Punnett",canal:"Me Salva",dur:"13 min",emoji:"🔲",url:"https://www.youtube.com/results?search_query=segunda+lei+mendel+quadro+punnett+me+salva"},{titulo:"Mendel no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+mendel+genetica+enem"}], atividade:"Simule cruzamentos com fichas coloridas",atividadeUrl:"https://www.youtube.com/results?search_query=cruzamento+genetico+fichas+escola",desafio:"Resolva 5 cruzamentos com quadro de Punnett" },
-    { dia:"Qua", foco:"Biotecnologia", videos:[{titulo:"Biotecnologia",canal:"Descomplica",dur:"14 min",emoji:"💉",url:"https://www.youtube.com/results?search_query=biotecnologia+descomplica+enem"},{titulo:"CRISPR e Transgênicos",canal:"Me Salva",dur:"13 min",emoji:"🔬",url:"https://www.youtube.com/results?search_query=crispr+transgenicos+enem"},{titulo:"Biotecnologia no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+biotecnologia+enem"}], atividade:"Debate: vacinas, transgênicos e CRISPR — prós e contras",atividadeUrl:"https://www.youtube.com/results?search_query=vacinas+transgenicos+crispr+debate+escola",desafio:"Pesquise e apresente 1 avanço recente da biotecnologia" },
-    { dia:"Qui", foco:"Evolução & Darwin", videos:[{titulo:"Teoria da Evolução",canal:"Me Salva",dur:"15 min",emoji:"🦎",url:"https://www.youtube.com/results?search_query=teoria+evolucao+darwin+me+salva+enem"},{titulo:"Seleção Natural e Artificial",canal:"Parabólica",dur:"14 min",emoji:"🐦",url:"https://www.youtube.com/results?search_query=selecao+natural+artificial+parabolica+enem"},{titulo:"Evolução no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+evolucao+darwin+enem"}], atividade:"Monte a 'árvore da vida' com animais do cotidiano",atividadeUrl:"https://www.youtube.com/results?search_query=arvore+da+vida+evolucao+atividade",desafio:"Compare seleção natural e artificial com exemplos reais" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Jurassic Park — cena do DNA (educativo)",canal:"Cinema Educativo",dur:"8 min",emoji:"🦕",url:"https://www.youtube.com/results?search_query=jurassic+park+cena+dna+educativo"},{titulo:"Revisão Genética e Evolução",canal:"Biologia Total",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+genetica+evolucao+enem"},{titulo:"Top questões: Genética e Evolução",canal:"Se Liga Nessa História",dur:"14 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+genetica+evolucao+questoes"}], atividade:"Debate após Jurassic Park: clonagem e ética",atividadeUrl:"https://www.youtube.com/results?search_query=jurassic+park+clonagem+etica+debate",desafio:"É possível clonar dinossauros? Pesquise e argumente!" },
-  ]},
-  { num:10, tema:"Redação — Estrutura e Repertório", emoji:"✍️", dias:[
-    { dia:"Seg", foco:"Estrutura da Redação ENEM", videos:[{titulo:"Estrutura da Redação nota 1000",canal:"Redação Top",dur:"15 min",emoji:"✍️",url:"https://www.youtube.com/results?search_query=estrutura+redacao+enem+nota+1000"},{titulo:"As 5 competências explicadas",canal:"Me Salva",dur:"14 min",emoji:"🎯",url:"https://www.youtube.com/results?search_query=5+competencias+redacao+enem+me+salva"},{titulo:"Exemplos de redações nota 1000",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+redacao+nota+1000+enem"}], atividade:"Monte o 'esqueleto' de uma redação coletiva",atividadeUrl:"https://www.youtube.com/results?search_query=estrutura+redacao+enem+atividade+grupo",desafio:"Cada aluno escreve 1 parágrafo da redação coletiva" },
-    { dia:"Ter", foco:"Introdução Perfeita", videos:[{titulo:"Como fazer introdução ENEM — 5 modelos",canal:"Redação Top",dur:"15 min",emoji:"🚀",url:"https://www.youtube.com/results?search_query=introducao+enem+5+modelos"},{titulo:"Introdução com repertório",canal:"Descomplica",dur:"14 min",emoji:"📖",url:"https://www.youtube.com/results?search_query=introducao+repertorio+enem+descomplica"},{titulo:"Erros na introdução",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+erros+introducao+enem"}], atividade:"Escreva 5 introduções diferentes para o mesmo tema",atividadeUrl:"https://www.youtube.com/results?search_query=como+fazer+introducao+enem+modelos",desafio:"Vote na melhor introdução da turma e justifique" },
-    { dia:"Qua", foco:"Argumentação e Repertório", videos:[{titulo:"Como argumentar bem no ENEM",canal:"Descomplica",dur:"14 min",emoji:"💬",url:"https://www.youtube.com/results?search_query=como+argumentar+enem+descomplica"},{titulo:"Repertório: dados, leis e filósofos",canal:"Redação Top",dur:"15 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=repertorio+sociocultural+enem+dados+leis+filosofos"},{titulo:"Melhores repertórios para o ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+repertorios+redacao+enem"}], atividade:"Construa um banco coletivo de repertórios",atividadeUrl:"https://www.youtube.com/results?search_query=banco+repertorios+redacao+enem",desafio:"Cada aluno traz 3 repertórios novos" },
-    { dia:"Qui", foco:"Proposta de Intervenção", videos:[{titulo:"Proposta de Intervenção — 5 elementos",canal:"Redação Top",dur:"15 min",emoji:"🔧",url:"https://www.youtube.com/results?search_query=proposta+intervencao+enem+5+elementos"},{titulo:"Erros na proposta",canal:"Descomplica",dur:"14 min",emoji:"❌",url:"https://www.youtube.com/results?search_query=erros+proposta+intervencao+enem"},{titulo:"Propostas nota 1000 comentadas",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+proposta+intervencao+enem"}], atividade:"Workshop: monte propostas com todos os 5 elementos",atividadeUrl:"https://www.youtube.com/results?search_query=proposta+intervencao+enem+workshop",desafio:"Escreva proposta com agente, ação, modo, efeito e detalhamento" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Escritores da Liberdade — trailer",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=escritores+liberdade+2007+trailer"},{titulo:"Correção ao vivo: redação nota 1000",canal:"Redação Top",dur:"20 min",emoji:"✅",url:"https://www.youtube.com/results?search_query=correcao+ao+vivo+redacao+nota+1000+enem"},{titulo:"Dicas finais para a redação",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+dicas+redacao+enem"}], atividade:"Redação completa em 50 min com cronômetro",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+redacao+enem+50+minutos",desafio:"Corrija a redação do colega usando a rubrica do ENEM" },
-  ]},
-  { num:11, tema:"Filosofia & Sociologia", emoji:"🧠", dias:[
-    { dia:"Seg", foco:"Filosofia Grega", videos:[{titulo:"Filosofia Antiga para o ENEM",canal:"Parabólica",dur:"15 min",emoji:"🏛️",url:"https://www.youtube.com/results?search_query=filosofia+antiga+enem+parabolica"},{titulo:"Sócrates, Platão e Aristóteles",canal:"Me Salva",dur:"14 min",emoji:"🤔",url:"https://www.youtube.com/results?search_query=socrates+platao+aristoteles+me+salva+enem"},{titulo:"Filosofia Grega no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+filosofia+grega+enem"}], atividade:"Debate socrático: 'O que é justo?'",atividadeUrl:"https://www.youtube.com/results?search_query=debate+socratico+justica+escola",desafio:"Escreva o que Aristóteles diria sobre 'felicidade hoje'" },
-    { dia:"Ter", foco:"Iluminismo e Contrato Social", videos:[{titulo:"Iluminismo para o ENEM",canal:"Me Salva",dur:"14 min",emoji:"💡",url:"https://www.youtube.com/results?search_query=iluminismo+enem+me+salva"},{titulo:"Locke, Rousseau e Hobbes comparados",canal:"Descomplica",dur:"15 min",emoji:"⚖️",url:"https://www.youtube.com/results?search_query=locke+rousseau+hobbes+comparados+descomplica"},{titulo:"Iluminismo no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+iluminismo+enem"}], atividade:"Compare os 3 filósofos com a sociedade atual",atividadeUrl:"https://www.youtube.com/results?search_query=locke+rousseau+hobbes+sociedade+atual",desafio:"Qual filósofo explica melhor o Brasil de hoje?" },
-    { dia:"Qua", foco:"Durkheim, Weber, Marx", videos:[{titulo:"Durkheim, Weber e Marx",canal:"Me Salva",dur:"15 min",emoji:"📋",url:"https://www.youtube.com/results?search_query=durkheim+weber+marx+me+salva+enem"},{titulo:"Os 3 clássicos da Sociologia",canal:"Descomplica",dur:"14 min",emoji:"🔍",url:"https://www.youtube.com/results?search_query=3+classicos+sociologia+durkheim+weber+marx"},{titulo:"Sociologia no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+sociologia+enem"}], atividade:"Apresentação de 3 min por grupo sobre cada sociólogo",atividadeUrl:"https://www.youtube.com/results?search_query=durkheim+weber+marx+apresentacao+escola",desafio:"Mapa mental comparando os 3 pensadores" },
-    { dia:"Qui", foco:"Cidadania e Direitos Humanos", videos:[{titulo:"Direitos Humanos no ENEM",canal:"Descomplica",dur:"14 min",emoji:"⚖️",url:"https://www.youtube.com/results?search_query=direitos+humanos+enem+descomplica"},{titulo:"Constituição Federal e Cidadania",canal:"Me Salva",dur:"13 min",emoji:"📜",url:"https://www.youtube.com/results?search_query=constituicao+federal+cidadania+me+salva"},{titulo:"Cidadania no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+cidadania+direitos+humanos"}], atividade:"Explore a Constituição e identifique seus direitos básicos",atividadeUrl:"https://www.youtube.com/results?search_query=constituicao+federal+direitos+basicos+escola",desafio:"Liste 5 direitos constitucionais que você exerce todo dia" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Matrix — cena da pílula (livre-arbítrio)",canal:"Cinema Educativo",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=matrix+cena+pilula+filosofia"},{titulo:"Revisão Filosofia e Sociologia",canal:"Parabólica",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+filosofia+sociologia+enem"},{titulo:"Questões Filosofia/Sociologia",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+filosofia+sociologia+questoes"}], atividade:"Debate após Matrix: realidade e livre-arbítrio",atividadeUrl:"https://www.youtube.com/results?search_query=matrix+filosofia+debate+escola",desafio:"Conecte Matrix com 2 filósofos da semana" },
-  ]},
-  { num:12, tema:"Matemática — Geometria", emoji:"📏", dias:[
-    { dia:"Seg", foco:"Geometria Plana", videos:[{titulo:"Geometria Plana",canal:"Prof. Ferretto",dur:"15 min",emoji:"📐",url:"https://www.youtube.com/results?search_query=geometria+plana+ferretto+enem"},{titulo:"Área e Perímetro",canal:"Descomplica",dur:"14 min",emoji:"📏",url:"https://www.youtube.com/results?search_query=area+perimetro+figuras+descomplica+enem"},{titulo:"Geometria Plana no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+geometria+plana+enem"}], atividade:"Meça áreas e perímetros reais da sala de aula",atividadeUrl:"https://www.youtube.com/results?search_query=geometria+plana+medir+sala+aula",desafio:"Calcule quantas pessoas caberiam no pátio como piscina" },
-    { dia:"Ter", foco:"Geometria Espacial", videos:[{titulo:"Geometria Espacial",canal:"Me Salva",dur:"14 min",emoji:"📦",url:"https://www.youtube.com/results?search_query=geometria+espacial+me+salva+enem"},{titulo:"Volume de Sólidos",canal:"Descomplica",dur:"15 min",emoji:"🔷",url:"https://www.youtube.com/results?search_query=volume+solidos+enem+descomplica"},{titulo:"Espacial no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+geometria+espacial+enem"}], atividade:"Monte sólidos com papel cartão e cola",atividadeUrl:"https://www.youtube.com/results?search_query=solidos+geometricos+dobradura+escola",desafio:"Calcule o volume dos sólidos que você montou" },
-    { dia:"Qua", foco:"Trigonometria", videos:[{titulo:"Trigonometria no Triângulo Retângulo",canal:"Prof. Ferretto",dur:"15 min",emoji:"📐",url:"https://www.youtube.com/results?search_query=trigonometria+triangulo+retangulo+ferretto"},{titulo:"Seno, Cosseno e Tangente na prática",canal:"Me Salva",dur:"14 min",emoji:"📊",url:"https://www.youtube.com/results?search_query=seno+cosseno+tangente+pratica+me+salva"},{titulo:"Trigonometria no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+trigonometria+enem"}], atividade:"Meça a altura de um prédio usando sombra e ângulo!",atividadeUrl:"https://www.youtube.com/results?search_query=trigonometria+medir+altura+predio+sombra",desafio:"Resolva 3 questões de trigonometria contra o tempo" },
-    { dia:"Qui", foco:"Geometria Analítica", videos:[{titulo:"Geometria Analítica",canal:"Descomplica",dur:"14 min",emoji:"🗺️",url:"https://www.youtube.com/results?search_query=geometria+analitica+descomplica+enem"},{titulo:"Distância entre pontos e reta",canal:"Me Salva",dur:"13 min",emoji:"📍",url:"https://www.youtube.com/results?search_query=distancia+pontos+reta+me+salva+enem"},{titulo:"Analítica no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+geometria+analitica+enem"}], atividade:"Trace pontos no plano formando caricaturas!",atividadeUrl:"https://www.youtube.com/results?search_query=plano+cartesiano+desenho+criativo+escola",desafio:"Desenhe um personagem usando pontos, retas e curvas" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Donald no País da Matemática (Disney completo)",canal:"Disney Clássico",dur:"27 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=donald+pais+matematica+disney+completo"},{titulo:"Revisão Geometria ENEM",canal:"Prof. Ferretto",dur:"15 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+geometria+enem+ferretto"}], atividade:"Assista Donald e identifique os conceitos geométricos",atividadeUrl:"https://www.youtube.com/results?search_query=donald+matematica+geometria+conceitos",desafio:"Encontre geometria em obras de arte ou arquitetura" },
-  ]},
-  { num:13, tema:"Ciências Humanas — Atualidades", emoji:"📰", dias:[
-    { dia:"Seg", foco:"Desigualdade Social", videos:[{titulo:"Desigualdade Social no Brasil",canal:"Me Salva",dur:"14 min",emoji:"📊",url:"https://www.youtube.com/results?search_query=desigualdade+social+brasil+enem+me+salva"},{titulo:"IBGE e Índice Gini",canal:"Descomplica",dur:"13 min",emoji:"📈",url:"https://www.youtube.com/results?search_query=ibge+indice+gini+desigualdade+enem"},{titulo:"Desigualdade no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+desigualdade+social+enem"}], atividade:"Analise infográficos do IBGE sobre desigualdade",atividadeUrl:"https://www.youtube.com/results?search_query=ibge+infografico+desigualdade+brasil",desafio:"Crie um infográfico sobre desigualdade na sua cidade" },
-    { dia:"Ter", foco:"Tecnologia e Sociedade", videos:[{titulo:"Tecnologia e Sociedade",canal:"Redação Top",dur:"14 min",emoji:"📱",url:"https://www.youtube.com/results?search_query=tecnologia+sociedade+redacao+enem"},{titulo:"Impactos das redes sociais",canal:"Descomplica",dur:"13 min",emoji:"💻",url:"https://www.youtube.com/results?search_query=redes+sociais+impactos+positivos+negativos+enem"},{titulo:"Tecnologia no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+tecnologia+enem"}], atividade:"Debate: redes sociais fazem mais bem ou mal?",atividadeUrl:"https://www.youtube.com/results?search_query=redes+sociais+debate+bem+mal+escola",desafio:"Argumente os dois lados com dados reais" },
-    { dia:"Qua", foco:"Saúde Pública e SUS", videos:[{titulo:"Como funciona o SUS",canal:"Me Salva",dur:"14 min",emoji:"🏥",url:"https://www.youtube.com/results?search_query=como+funciona+sus+me+salva"},{titulo:"Saúde pública no Brasil",canal:"Descomplica",dur:"13 min",emoji:"💊",url:"https://www.youtube.com/results?search_query=saude+publica+brasil+descomplica+enem"},{titulo:"SUS no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+sus+saude+publica+enem"}], atividade:"Mapeie os serviços de saúde do bairro de cada aluno",atividadeUrl:"https://www.youtube.com/results?search_query=sus+servicos+saude+bairro+escola",desafio:"Pesquise 3 políticas públicas de saúde recentes" },
-    { dia:"Qui", foco:"Diversidade Cultural", videos:[{titulo:"Diversidade Cultural Brasileira",canal:"Me Salva",dur:"14 min",emoji:"🌈",url:"https://www.youtube.com/results?search_query=diversidade+cultural+brasileira+enem"},{titulo:"Herança Africana e Indígena",canal:"Parabólica",dur:"13 min",emoji:"🪘",url:"https://www.youtube.com/results?search_query=heranca+africana+indigena+brasil+enem"},{titulo:"Diversidade no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+diversidade+cultural+enem"}], atividade:"Cada aluno apresenta uma herança cultural da família",atividadeUrl:"https://www.youtube.com/results?search_query=diversidade+cultural+apresentacao+escola",desafio:"Pesquise e crie um mini-relato da história da sua família" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Que Horas Ela Volta? — trailer",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=que+horas+ela+volta+trailer"},{titulo:"10 questões de Humanas comentadas",canal:"Descomplica",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=10+questoes+humanas+enem+comentadas"},{titulo:"Atualidades para o ENEM",canal:"Se Liga Nessa História",dur:"17 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+atualidades+enem+2026"}], atividade:"Simulado de 10 questões + debate sobre o filme",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+humanas+enem+questoes",desafio:"O filme retrata a realidade de vocês? Debata com exemplos!" },
-  ]},
-  { num:14, tema:"Física — Eletrodinâmica & Ondas", emoji:"🔌", dias:[
-    { dia:"Seg", foco:"Circuitos Elétricos", videos:[{titulo:"Eletrodinâmica",canal:"Física e Afins",dur:"14 min",emoji:"⚡",url:"https://www.youtube.com/results?search_query=eletrodinamica+fisica+e+afins+enem"},{titulo:"Circuitos em Série e Paralelo",canal:"Me Salva",dur:"13 min",emoji:"🔌",url:"https://www.youtube.com/results?search_query=circuitos+serie+paralelo+me+salva+enem"},{titulo:"Eletrodinâmica no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+eletrodinamica+enem"}], atividade:"Monte um circuito simples com pilha e LED",atividadeUrl:"https://www.youtube.com/results?search_query=circuito+eletrico+pilha+led+escola",desafio:"Calcule a conta de luz de casa com as fórmulas" },
-    { dia:"Ter", foco:"Lei de Ohm", videos:[{titulo:"Lei de Ohm",canal:"Me Salva",dur:"14 min",emoji:"🔋",url:"https://www.youtube.com/results?search_query=lei+de+ohm+me+salva+enem"},{titulo:"Resistência elétrica na prática",canal:"Descomplica",dur:"13 min",emoji:"🔩",url:"https://www.youtube.com/results?search_query=resistencia+eletrica+pratica+descomplica"},{titulo:"Ohm no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+lei+ohm+enem"}], atividade:"Meça resistências com multímetro e verifique a Lei de Ohm",atividadeUrl:"https://www.youtube.com/results?search_query=lei+ohm+multimetro+experimento+escola",desafio:"Resolva 4 questões de circuitos do ENEM" },
-    { dia:"Qua", foco:"Ondas Mecânicas e Sonoras", videos:[{titulo:"Ondas",canal:"Descomplica",dur:"14 min",emoji:"〰️",url:"https://www.youtube.com/results?search_query=ondas+mecanicas+descomplica+enem"},{titulo:"Som: frequência e amplitude",canal:"Me Salva",dur:"13 min",emoji:"🎵",url:"https://www.youtube.com/results?search_query=som+frequencia+amplitude+me+salva"},{titulo:"Ondas no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+ondas+enem"}], atividade:"Experimento: faça o som viajar com cordas e copos",atividadeUrl:"https://www.youtube.com/results?search_query=ondas+sonoras+experimento+copo+escola",desafio:"Calcule a frequência de um som com o celular" },
-    { dia:"Qui", foco:"Óptica e Espelhos", videos:[{titulo:"Óptica",canal:"Mundo da Física",dur:"14 min",emoji:"🔭",url:"https://www.youtube.com/results?search_query=optica+mundo+da+fisica+enem"},{titulo:"Espelhos planos e curvos",canal:"Me Salva",dur:"13 min",emoji:"🪞",url:"https://www.youtube.com/results?search_query=espelhos+planos+curvos+me+salva+enem"},{titulo:"Óptica no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+optica+enem"}], atividade:"Experimento com espelhos e colheres: por que a imagem inverte?",atividadeUrl:"https://www.youtube.com/results?search_query=espelhos+optica+experimento+colher",desafio:"Explique a inversão de imagem nos espelhos côncavos" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Homem de Ferro — física nas cenas",canal:"Cinema Educativo",dur:"8 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=iron+man+fisica+eletricidade+cenas"},{titulo:"Revisão Eletrodinâmica e Ondas",canal:"Me Salva",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+eletrodinamica+ondas+enem"},{titulo:"Física II no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+fisica+eletrodinamica+ondas+enem"}], atividade:"Identifique eletricidade e óptica em cenas de filmes",atividadeUrl:"https://www.youtube.com/results?search_query=fisica+filmes+eletricidade+optica",desafio:"Liste 5 tecnologias que usam eletricidade na sua casa" },
-  ]},
-  { num:15, tema:"Linguagens — Literatura Brasileira", emoji:"📚", dias:[
-    { dia:"Seg", foco:"Modernismo Brasileiro", videos:[{titulo:"Modernismo no Brasil",canal:"Parabólica",dur:"15 min",emoji:"🎨",url:"https://www.youtube.com/results?search_query=modernismo+brasil+parabolica+enem"},{titulo:"Semana de Arte Moderna",canal:"Me Salva",dur:"14 min",emoji:"🖼️",url:"https://www.youtube.com/results?search_query=semana+arte+moderna+me+salva+enem"},{titulo:"Modernismo no ENEM",canal:"Se Liga Nessa História",dur:"13 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+modernismo+enem"}], atividade:"Leia e ilustre um poema de Drummond ou Bandeira",atividadeUrl:"https://www.youtube.com/results?search_query=poema+drummond+bandeira+ilustracao+escola",desafio:"Escreva um poema modernista sobre o seu bairro" },
-    { dia:"Ter", foco:"Regionalismo — Nordeste", videos:[{titulo:"Vidas Secas — Graciliano Ramos",canal:"Me Salva",dur:"14 min",emoji:"🌵",url:"https://www.youtube.com/results?search_query=vidas+secas+graciliano+ramos+enem"},{titulo:"Regionalismo na Literatura",canal:"Parabólica",dur:"13 min",emoji:"🌾",url:"https://www.youtube.com/results?search_query=regionalismo+literatura+brasileira+enem"},{titulo:"Regionalismo no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+regionalismo+literatura+enem"}], atividade:"Leitura em voz alta de trecho de 'Vidas Secas' e debate",atividadeUrl:"https://www.youtube.com/results?search_query=vidas+secas+leitura+debate+escola",desafio:"Compare a seca do romance com desafios climáticos atuais" },
-    { dia:"Qua", foco:"Romantismo e Realismo", videos:[{titulo:"Romantismo na Literatura",canal:"Stoodi",dur:"14 min",emoji:"💖",url:"https://www.youtube.com/results?search_query=romantismo+literatura+stoodi+enem"},{titulo:"Machado de Assis e o Realismo",canal:"Descomplica",dur:"13 min",emoji:"🎩",url:"https://www.youtube.com/results?search_query=machado+assis+realismo+descomplica+enem"},{titulo:"Romantismo e Realismo no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+romantismo+realismo+enem"}], atividade:"Compare romance do séc. XIX com novela da TV atual",atividadeUrl:"https://www.youtube.com/results?search_query=romantismo+realismo+comparacao+novela+atual",desafio:"Identifique características românticas que ainda existem hoje" },
-    { dia:"Qui", foco:"Slam Poetry & Literatura Contemporânea", videos:[{titulo:"O que é Slam Poetry e o ENEM",canal:"Descomplica",dur:"13 min",emoji:"🎤",url:"https://www.youtube.com/results?search_query=slam+poetry+enem+literatura"},{titulo:"Performances de Slam para inspirar",canal:"Slam na Escola",dur:"15 min",emoji:"🎶",url:"https://www.youtube.com/results?search_query=slam+poetry+performances+brasil+escola"},{titulo:"Literatura Contemporânea no ENEM",canal:"Se Liga Nessa História",dur:"14 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+literatura+contemporanea+enem"}], atividade:"Cada aluno escreve e apresenta seu slam para a turma",atividadeUrl:"https://www.youtube.com/results?search_query=slam+poetry+atividade+escola",desafio:"Vote no slam mais impactante — o que o faz ser poderoso?" },
-    { dia:"Sex", foco:"Revisão + Redação Semanal ✍️", videos:[{titulo:"Capitães da Areia — trailer",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=capitaes+da+areia+2011+trailer"},{titulo:"Revisão Literatura Brasileira",canal:"Parabólica",dur:"20 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+literatura+brasileira+enem"},{titulo:"Top questões de Literatura",canal:"Se Liga Nessa História",dur:"17 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+literatura+questoes+enem"}], atividade:"Assista 'Capitães da Areia' e debata exclusão social",atividadeUrl:"https://www.youtube.com/results?search_query=capitaes+da+areia+exclusao+social",desafio:"Qual movimento literário representa o filme? Justifique" },
-  ]},
-  { num:16, tema:"Simulado Geral + Revisão Intensiva", emoji:"🎯", dias:[
-    { dia:"Seg", foco:"Simulado — Linguagens", videos:[{titulo:"Gabarito comentado Linguagens ENEM",canal:"Descomplica",dur:"25 min",emoji:"📝",url:"https://www.youtube.com/results?search_query=gabarito+comentado+linguagens+enem"},{titulo:"Dicas para Linguagens",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+linguagens+dicas+enem"}], atividade:"45 questões cronometradas de Linguagens + correção em grupo",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+linguagens+enem+gabarito",desafio:"Identifique seus 3 maiores pontos fracos em Linguagens" },
-    { dia:"Ter", foco:"Simulado — Ciências Humanas", videos:[{titulo:"Gabarito comentado Humanas ENEM",canal:"Parabólica",dur:"25 min",emoji:"📝",url:"https://www.youtube.com/results?search_query=gabarito+comentado+humanas+enem"},{titulo:"Estratégias para Humanas",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+estrategias+humanas+enem"}], atividade:"45 questões cronometradas de Humanas + correção",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+humanas+enem+gabarito",desafio:"Anote todos os temas que erraram para revisão" },
-    { dia:"Qua", foco:"Simulado — Ciências da Natureza", videos:[{titulo:"Gabarito comentado Natureza ENEM",canal:"Me Salva",dur:"25 min",emoji:"📝",url:"https://www.youtube.com/results?search_query=gabarito+comentado+ciencias+natureza+enem"},{titulo:"Dicas para Natureza no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+ciencias+natureza+dicas"}], atividade:"45 questões cronometradas de Natureza + correção",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+ciencias+natureza+enem",desafio:"Qual disciplina de Natureza precisa de mais revisão?" },
-    { dia:"Qui", foco:"Simulado — Matemática", videos:[{titulo:"Gabarito comentado Matemática ENEM",canal:"Prof. Ferretto",dur:"25 min",emoji:"📝",url:"https://www.youtube.com/results?search_query=gabarito+comentado+matematica+enem"},{titulo:"Estratégias para Matemática",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+matematica+estrategias+enem"}], atividade:"45 questões cronometradas de Matemática + correção",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+matematica+enem+gabarito",desafio:"Monte plano de revisão personalizado baseado nos erros" },
-    { dia:"Sex", foco:"Redação + Celebração da Metade! 🎉", videos:[{titulo:"Escritores da Liberdade — motivação",canal:"Cinema",dur:"10 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=escritores+liberdade+motivacao"},{titulo:"Correção ao vivo: redação simulada",canal:"Redação Top",dur:"20 min",emoji:"✅",url:"https://www.youtube.com/results?search_query=correcao+ao+vivo+redacao+enem"},{titulo:"Reta final: mentalidade de campeão",canal:"Se Liga Nessa História",dur:"12 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+motivacao+reta+final+enem"}], atividade:"Redação em 50 min + lanche especial comemorativo! 🎂",atividadeUrl:"https://www.youtube.com/results?search_query=simulado+redacao+enem+50+minutos",desafio:"Monte um gráfico mostrando sua evolução de notas 📈" },
-  ]},
-  { num:17, tema:"Revisão Dirigida — Pontos Fracos", emoji:"🔁", dias:[
-    { dia:"Seg", foco:"Revisão Linguagens", videos:[{titulo:"Revisão Linguagens ENEM completo",canal:"Parabólica",dur:"25 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+linguagens+enem+completo"},{titulo:"Erros mais comuns em Linguagens",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+erros+linguagens+enem"}], atividade:"Refaça as questões erradas e explique para um colega",atividadeUrl:"https://www.youtube.com/results?search_query=revisao+linguagens+enem+erros",desafio:"Ensine o tema que mais errou (quem ensina, aprende!)" },
-    { dia:"Ter", foco:"Revisão Humanas", videos:[{titulo:"Revisão Humanas ENEM completo",canal:"Parabólica",dur:"25 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+humanas+enem+completo"},{titulo:"Mapa mental: História e Geografia",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+mapa+mental+historia+geografia"}], atividade:"Mapa mental coletivo dos erros mais comuns da turma",atividadeUrl:"https://www.youtube.com/results?search_query=revisao+humanas+enem+erros+mapa",desafio:"Explique o tema de Humanas que mais errou para a turma" },
-    { dia:"Qua", foco:"Revisão Natureza", videos:[{titulo:"Revisão Ciências da Natureza ENEM",canal:"Me Salva",dur:"25 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+ciencias+natureza+enem+completo"},{titulo:"Top erros de Natureza no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+erros+natureza+enem"}], atividade:"Experimentos-relâmpago para fixar o que erraram",atividadeUrl:"https://www.youtube.com/results?search_query=experimentos+rapidos+ciencias+natureza+escola",desafio:"Crie um resumo visual colorido (cartaz) do que mais errou" },
-    { dia:"Qui", foco:"Revisão Matemática", videos:[{titulo:"Revisão Matemática ENEM completo",canal:"Prof. Ferretto",dur:"25 min",emoji:"📚",url:"https://www.youtube.com/results?search_query=revisao+matematica+enem+completo+ferretto"},{titulo:"Questões mais difíceis comentadas",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+questoes+dificeis+matematica+enem"}], atividade:"Aula colaborativa: quem sabe ensina quem não sabe",atividadeUrl:"https://www.youtube.com/results?search_query=matematica+enem+revisao+colaborativa",desafio:"Monte 'guia de sobrevivência' em Matemática para a prova" },
-    { dia:"Sex", foco:"Redação + Temas de 2026 ✍️", videos:[{titulo:"O Escafandro e a Borboleta — trailer",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=escafandro+borboleta+trailer"},{titulo:"Possíveis temas de redação ENEM 2026",canal:"Redação Top",dur:"20 min",emoji:"✍️",url:"https://www.youtube.com/results?search_query=possiveis+temas+redacao+enem+2026"},{titulo:"Neurodiversidade: modelo de redação",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+neurodiversidade+redacao+enem"}], atividade:"Escreva sobre neurodiversidade ou apostas esportivas",atividadeUrl:"https://www.youtube.com/results?search_query=redacao+neurodiversidade+apostas+esportivas+enem+2026",desafio:"Corrija a redação do colega com os critérios do ENEM" },
-  ]},
-  { num:18, tema:"Reta Final — Revisão Total 🚀", emoji:"🚀", dias:[
-    { dia:"Seg", foco:"Funções + Geometria", videos:[{titulo:"10 fórmulas mais cobradas no ENEM",canal:"Prof. Ferretto",dur:"20 min",emoji:"📋",url:"https://www.youtube.com/results?search_query=10+formulas+mais+cobradas+enem+matematica"},{titulo:"Flashcards: Geometria e Funções",canal:"Se Liga Nessa História",dur:"20 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+flashcards+geometria+funcoes+enem"}], atividade:"Monte o 'caderno de ouro' com todas as fórmulas",atividadeUrl:"https://www.youtube.com/results?search_query=formulas+essenciais+matematica+enem",desafio:"Resolva 10 questões mistas de Matemática sem consultar" },
-    { dia:"Ter", foco:"Ecologia + Genética", videos:[{titulo:"Revisão Biologia ENEM em 30 min",canal:"Biologia Total",dur:"30 min",emoji:"🧬",url:"https://www.youtube.com/results?search_query=revisao+biologia+enem+30+minutos"},{titulo:"Quiz Biologia no ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+quiz+biologia+enem"}], atividade:"Quiz relâmpago: 20 perguntas em equipe!",atividadeUrl:"https://kahoot.com/",desafio:"Crie 5 questões para desafiar outro grupo" },
-    { dia:"Qua", foco:"Brasil República + Atualidades", videos:[{titulo:"Resumo Brasil República",canal:"Parabólica",dur:"20 min",emoji:"🏛️",url:"https://www.youtube.com/results?search_query=resumo+brasil+republica+parabolica"},{titulo:"Atualidades para o ENEM 2026",canal:"Se Liga Nessa História",dur:"20 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+atualidades+enem+2026"}], atividade:"Linha do tempo colaborativa: Brasil do séc. XX ao XXI",atividadeUrl:"https://www.youtube.com/results?search_query=linha+do+tempo+brasil+seculo+xx+xxi",desafio:"Conecte 3 fatos históricos com problemas sociais atuais" },
-    { dia:"Qui", foco:"Química + Física — Revisão Final", videos:[{titulo:"Física e Química ENEM em 1 hora",canal:"Me Salva",dur:"60 min",emoji:"⚡🧪",url:"https://www.youtube.com/results?search_query=fisica+quimica+enem+1+hora+revisao"}], atividade:"15 de Física + 15 de Química em resolução coletiva",atividadeUrl:"https://www.youtube.com/results?search_query=questoes+fisica+quimica+enem+revisao+final",desafio:"Resumo visual de cada matéria em meia página" },
-    { dia:"Sex", foco:"Redação Final + Festa de Encerramento! 🎉", videos:[{titulo:"Coach Carter — disciplina e vitória (trailer)",canal:"Cinema",dur:"5 min",emoji:"🎬",url:"https://www.youtube.com/results?search_query=coach+carter+trailer+legendado"},{titulo:"Carta de motivação para o ENEM",canal:"Se Liga Nessa História",dur:"15 min",emoji:"💪",url:"https://www.youtube.com/results?search_query=se+liga+nessa+historia+motivacao+enem+voce+consegue"},{titulo:"Tudo sobre o dia da prova — dicas finais",canal:"Redação Top",dur:"20 min",emoji:"🎯",url:"https://www.youtube.com/results?search_query=dia+da+prova+enem+dicas+finais"}], atividade:"Última redação + festa de encerramento do projeto! 🎂",atividadeUrl:"https://www.youtube.com/results?search_query=motivacao+enem+ultima+semana",desafio:"Carta para si mesmo: 'No dia do ENEM, eu vou...' 💪" },
-  ]},
+// LEGENDA DOS LINKS:
+// Semanas 1-5: IDs reais verificados (youtube.com/watch?v=ID)
+// Semanas 6-18: busca no canal correto (youtube.com/@CANAL/search?query=TEMA)
+// Canais usados: @professornoslen, @Descomplica, @MeSalva, @maismatemática, @biologiatotal, @seliganessahistoria, @xequematenem
+
+var SEMANAS = [
+ {n:1,e:"&#128216;",t:"Semana 1",d:[
+  {f:"Generos Textuais + Como Nao Zerar",v:[
+   {t:"Como NAO ZERAR a REDACAO do ENEM - Prof. Noslen",c:"Professor Noslen",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/watch?v=2ukOzhZhKrQ"},
+   {t:"Exercicios de Generos Textuais ENEM 2023 - Prof. Noslen",c:"Professor Noslen",d:"ver duracao",e:"&#128216;",u:"https://www.youtube.com/watch?v=PEOKP3J2vfM"},
+   {t:"Generos Textuais - Redacao | Descomplica",c:"Descomplica",d:"ver duracao",e:"&#127919;",u:"https://www.youtube.com/watch?v=wewdmqFnDok"},
+  ],at:"Compare um HQ, meme e noticia - qual o objetivo de cada um?",au:"https://www.youtube.com/@professornoslen/search?query=generos+textuais+enem",
+  ex:{tl:"Exercicio Especial: Mapeie os 5 zeros",tx:"Liste os 5 motivos que zeram a redacao do ENEM e escreva um exemplo do que NAO fazer em cada um. Depois escreva 5 linhas de introducao sobre tecnologia e juventude.",u:"https://www.youtube.com/watch?v=2ukOzhZhKrQ"},
+  ds:"Encontre 3 generos textuais diferentes no celular hoje"},
+  {f:"Funcao do 1o Grau",v:[
+   {t:"Funcao do Primeiro Grau | Matematica ENEM - Xequemat",c:"Xequemat",d:"ver duracao",e:"&#128200;",u:"https://www.youtube.com/watch?v=pkQpGMhA_pI"},
+   {t:"Como Aprender Funcao do 1o Grau em 15 minutos [ENEM]",c:"Descomplica",d:"15 min",e:"&#128201;",u:"https://www.youtube.com/watch?v=6jZVKO4Gd2o"},
+   {t:"Funcao do 1o Grau - questoes ENEM comentadas",c:"Ferretto",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@maismatemática/search?query=funcao+primeiro+grau+enem"},
+  ],at:"Calcule quanto ganharia trabalhando X horas a diferentes salarios",au:"https://www.youtube.com/@Descomplica/search?query=funcao+primeiro+grau+cotidiano",ds:"Monte tabela com 5 situacoes do dia a dia usando funcao afim"},
+  {f:"Globalizacao e Espaco Urbano",v:[
+   {t:"Globalizacao para o ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127758;",u:"https://www.youtube.com/@seliganessahistoria/search?query=globalizacao+enem"},
+   {t:"Urbanizacao no Brasil",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127961;",u:"https://www.youtube.com/@seliganessahistoria/search?query=urbanizacao+brasil"},
+   {t:"Globalizacao e Desigualdades",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=globalizacao+desigualdade+enem"},
+  ],at:"Rastreie a origem de 10 produtos do dia a dia no mapa",au:"https://www.youtube.com/@seliganessahistoria/search?query=globalizacao",ds:"Liste 10 itens com paises de origem diferentes"},
+  {f:"Cadeias Alimentares e Ecologia",v:[
+   {t:"Cadeia Alimentar e Teia - Biologia Total",c:"Biologia Total",d:"ver duracao",e:"&#129409;",u:"https://www.youtube.com/@biologiatotal/search?query=cadeia+alimentar+enem"},
+   {t:"Relacoes Ecologicas - Biologia Total",c:"Biologia Total",d:"ver duracao",e:"&#128375;",u:"https://www.youtube.com/@biologiatotal/search?query=relacoes+ecologicas+enem"},
+   {t:"Ecologia no ENEM - questoes comentadas",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=ecologia+enem"},
+  ],at:"Monte uma cadeia alimentar com recortes de revista",au:"https://www.youtube.com/@biologiatotal/search?query=cadeia+alimentar",ds:"Quem montar a cadeia mais completa da turma vence!"},
+  {f:"Redacao Sem.1 + Espanhol",v:[
+   {t:"SAIBA COMO NAO ZERAR A REDACAO - Se Liga Nessa Historia",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/watch?v=MmloFMzBGcM"},
+   {t:"Wall-E - abertura sem palavras (linguagem visual)",c:"Cinema",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/watch?v=4G2unzNoOnY"},
+   {t:"Espanhol no ENEM - Prof. Noslen",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+enem"},
+  ],at:"Escreva 5 linhas de introducao sem usar Desde os primodios",au:"https://www.youtube.com/@professornoslen/search?query=introducao+redacao+enem",ds:"Troque a introducao com um colega e de feedback"},
+ ]},
+ {n:2,e:"&#128208;",t:"Semana 2",d:[
+  {f:"Figuras de Linguagem e Interpretacao",v:[
+   {t:"Figuras de Linguagem no ENEM - Prof. Noslen (nov 2023)",c:"Professor Noslen",d:"ver duracao",e:"&#127925;",u:"https://www.youtube.com/watch?v=jOuCvHqtQBU"},
+   {t:"Exercicios de Figuras de Linguagem ENEM 2023 - Noslen",c:"Professor Noslen",d:"ver duracao",e:"&#128269;",u:"https://www.youtube.com/watch?v=dyhSYWyQ0Vg"},
+   {t:"O Que Nunca Te Ensinaram sobre Figuras de Linguagem ENEM",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/watch?v=6AaiYNjIOf4"},
+  ],at:"Analise letras de musicas e identifique figuras de linguagem",au:"https://www.youtube.com/@professornoslen/search?query=figuras+de+linguagem",ds:"Encontre 5 figuras de linguagem em uma musica favorita"},
+  {f:"Funcao do 2o Grau e Exponencial",v:[
+   {t:"Funcao Quadratica ENEM",c:"Xequemat",d:"ver duracao",e:"&#9968;",u:"https://www.youtube.com/@xequematenem/search?query=funcao+quadratica+enem"},
+   {t:"Funcao Exponencial ENEM",c:"Xequemat",d:"ver duracao",e:"&#128640;",u:"https://www.youtube.com/@xequematenem/search?query=funcao+exponencial+enem"},
+   {t:"Funcao 2o Grau e Exponencial - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=funcao+quadratica+exponencial+enem"},
+  ],at:"Simule crescimento de seguidores mes a mes",au:"https://www.youtube.com/@Descomplica/search?query=crescimento+exponencial",ds:"Dobre um papel 10 vezes e estime a altura"},
+  {f:"Brasil Colonia e Escravidao",v:[
+   {t:"Revisao ENEM | Historia | Brasil Colonia - Economia, Escravidao e Revoltas",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#9973;",u:"https://www.youtube.com/watch?v=d8cLHxX3Khg"},
+   {t:"Brasil Colonia - panorama geral - Se Liga Nessa Historia",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#9994;",u:"https://www.youtube.com/watch?v=sP2kl0irjBQ"},
+   {t:"Escravidao no Brasil - Resumo completo",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/watch?v=KIWJClnWMO8"},
+  ],at:"Crie uma linha do tempo ilustrada em grupo",au:"https://www.youtube.com/@seliganessahistoria/search?query=brasil+colonia",ds:"Desenhe a linha do tempo com pelo menos 8 eventos"},
+  {f:"Cinematica e Energia",v:[
+   {t:"Cinematica MRU e MRUV - ENEM",c:"Descomplica",d:"ver duracao",e:"&#127939;",u:"https://www.youtube.com/@Descomplica/search?query=cinematica+mru+mruv+enem"},
+   {t:"Trabalho e Energia - ENEM",c:"Descomplica",d:"ver duracao",e:"&#9889;",u:"https://www.youtube.com/@Descomplica/search?query=trabalho+energia+enem"},
+   {t:"Fisica Cinematica e Energia - questoes",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=cinematica+energia+enem"},
+  ],at:"Meca sua velocidade correndo no patio com cronometro",au:"https://www.youtube.com/@Descomplica/search?query=velocidade+media+cinematica",ds:"Calcule velocidade media, tempo e distancia com dados reais"},
+  {f:"Redacao Sem.2 + Espanhol",v:[
+   {t:"Como Argumentar Bem - Redacao ENEM",c:"Descomplica",d:"ver duracao",e:"&#128172;",u:"https://www.youtube.com/@Descomplica/search?query=argumentar+redacao+enem"},
+   {t:"Interpretacao de Texto em Espanhol ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+interpretacao+enem"},
+   {t:"Funcoes: revisao geral ENEM",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=funcoes+revisao+enem"},
+  ],at:"Kahoot de funcoes - quem acerta mais ganha estrela!",au:"https://kahoot.com/",ds:"Resolva uma questao de espanhol de prova anterior"},
+ ]},
+ {n:3,e:"&#127757;",t:"Semana 3",d:[
+  {f:"Intertextualidade e Funcoes da Linguagem",v:[
+   {t:"Exercicios de Funcoes da Linguagem ENEM 2023 - Noslen",c:"Professor Noslen",d:"ver duracao",e:"&#128279;",u:"https://www.youtube.com/watch?v=QXjMg0EO94w"},
+   {t:"Intertextualidade - ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128514;",u:"https://www.youtube.com/@professornoslen/search?query=intertextualidade+enem"},
+   {t:"Linguagens - questoes comentadas",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=linguagens+questoes+enem"},
+  ],at:"Resolva 5 questoes de interpretacao do ENEM em dupla",au:"https://www.youtube.com/@professornoslen/search?query=interpretacao+texto+enem",ds:"Troque respostas com o colega e discutam os erros"},
+  {f:"Logaritmo e Estatistica",v:[
+   {t:"Logaritmos - ENEM",c:"Xequemat",d:"ver duracao",e:"&#128266;",u:"https://www.youtube.com/@xequematenem/search?query=logaritmo+enem"},
+   {t:"Media Moda e Mediana - ENEM",c:"Descomplica",d:"ver duracao",e:"&#128202;",u:"https://www.youtube.com/@Descomplica/search?query=media+moda+mediana+enem"},
+   {t:"Estatistica - questoes ENEM",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=estatistica+enem"},
+  ],at:"Calcule media, moda e mediana das notas da turma",au:"https://www.youtube.com/@Descomplica/search?query=media+moda+mediana",ds:"Resolva 5 questoes de log contra o cronometro"},
+  {f:"Primeira Republica e Era Vargas",v:[
+   {t:"Republica Velha - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#9749;",u:"https://www.youtube.com/@seliganessahistoria/search?query=republica+velha+enem"},
+   {t:"Era Vargas - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128226;",u:"https://www.youtube.com/@seliganessahistoria/search?query=era+vargas+enem"},
+   {t:"Primeira Republica e Era Vargas - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=republica+velha+era+vargas+enem"},
+  ],at:"Debate: quem mandava no Brasil na Republica Velha?",au:"https://www.youtube.com/@seliganessahistoria/search?query=cafe+com+leite+republica",ds:"Mapa mental: estrutura de poder na Primeira Republica"},
+  {f:"Ciclos Biogeoquimicos e Relacoes Ecologicas",v:[
+   {t:"Ciclos Biogeoquimicos - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#128167;",u:"https://www.youtube.com/@biologiatotal/search?query=ciclos+biogeoquimicos+enem"},
+   {t:"Relacoes Ecologicas - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#129309;",u:"https://www.youtube.com/@biologiatotal/search?query=relacoes+ecologicas+enem"},
+   {t:"Ecologia - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=ecologia+questoes+enem"},
+  ],at:"Reproduza o ciclo da agua com recipiente e plastico filme",au:"https://www.youtube.com/@biologiatotal/search?query=ciclo+agua+ecologia",ds:"Identifique 3 relacoes ecologicas reais no seu bairro"},
+  {f:"Redacao Sem.3 + Espanhol",v:[
+   {t:"Proposta de Intervencao - 5 elementos obrigatorios",c:"Descomplica",d:"ver duracao",e:"&#128295;",u:"https://www.youtube.com/@Descomplica/search?query=proposta+intervencao+enem+5+elementos"},
+   {t:"Espanhol - Conectivos ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+conectivos+enem"},
+   {t:"Redacao sobre urbanizacao - modelo",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+urbanizacao+enem"},
+  ],at:"Escreva redacao sobre urbanizacao com proposta completa",au:"https://www.youtube.com/@Descomplica/search?query=urbanizacao+periferia+redacao",ds:"Resolva 2 questoes de espanhol usando conectivos como pista"},
+ ]},
+ {n:4,e:"&#129514;",t:"Semana 4",d:[
+  {f:"Modernismo e Literatura Brasileira",v:[
+   {t:"Modernismo no Brasil - ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127912;",u:"https://www.youtube.com/@professornoslen/search?query=modernismo+brasil+enem"},
+   {t:"Literatura Brasileira - questoes ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128444;",u:"https://www.youtube.com/@professornoslen/search?query=literatura+brasileira+enem"},
+   {t:"Modernismo - revisao ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=modernismo+literatura+enem"},
+  ],at:"Leia e ilustre um poema de Drummond ou Bandeira",au:"https://www.youtube.com/@professornoslen/search?query=modernismo+poema",ds:"Escreva um poema modernista sobre o seu bairro"},
+  {f:"Geometria Plana e Espacial",v:[
+   {t:"Geometria Plana - ENEM",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=geometria+plana+enem"},
+   {t:"Geometria Espacial Volume - ENEM",c:"Xequemat",d:"ver duracao",e:"&#128230;",u:"https://www.youtube.com/@xequematenem/search?query=geometria+espacial+volume+enem"},
+   {t:"Geometria - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=geometria+questoes+enem"},
+  ],at:"Meca areas e volumes reais da sala de aula",au:"https://www.youtube.com/@Descomplica/search?query=geometria+plana+area+perimetro",ds:"Calcule quantas pessoas caberiam no patio como piscina"},
+  {f:"Biomas Brasileiros e Meio Ambiente",v:[
+   {t:"Biomas Brasileiros - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#127807;",u:"https://www.youtube.com/@biologiatotal/search?query=biomas+brasileiros+enem"},
+   {t:"Desmatamento e Mudancas Climaticas - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127777;",u:"https://www.youtube.com/@seliganessahistoria/search?query=desmatamento+mudancas+climaticas"},
+   {t:"Biomas e Meio Ambiente - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=biomas+meio+ambiente+enem"},
+  ],at:"Preencha um mapa mudo do Brasil com os biomas",au:"https://www.youtube.com/@biologiatotal/search?query=biomas+brasileiros",ds:"Monte um cartaz sobre um bioma ameacado"},
+  {f:"Funcoes Organicas e Ligacoes Quimicas",v:[
+   {t:"Funcoes Organicas - ENEM",c:"Descomplica",d:"ver duracao",e:"&#129518;",u:"https://www.youtube.com/@Descomplica/search?query=funcoes+organicas+quimica+enem"},
+   {t:"Ligacoes Quimicas - ENEM",c:"Descomplica",d:"ver duracao",e:"&#128279;",u:"https://www.youtube.com/@Descomplica/search?query=ligacoes+quimicas+enem"},
+   {t:"Quimica Organica - questoes ENEM",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=quimica+organica+enem"},
+  ],at:"Identifique compostos organicos em casa e monte moleculas 3D",au:"https://www.youtube.com/@Descomplica/search?query=funcoes+organicas+cotidiano",ds:"Construa agua, sal e acucar em 3D com massinha"},
+  {f:"Redacao Sem.4 + Espanhol",v:[
+   {t:"Repertorio Sociocultural - Redacao ENEM",c:"Descomplica",d:"ver duracao",e:"&#128218;",u:"https://www.youtube.com/@Descomplica/search?query=repertorio+sociocultural+redacao+enem"},
+   {t:"Espanhol - Generos Textuais ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+generos+textuais+enem"},
+   {t:"Redacao sobre meio ambiente - modelo",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+meio+ambiente+enem"},
+  ],at:"Assista trechos do Lorax e conecte com temas ambientais",au:"https://www.youtube.com/@Descomplica/search?query=o+lorax+ecologia",ds:"Resolva 2 questoes de espanhol sobre generos textuais"},
+ ]},
+ {n:5,e:"&#128202;",t:"Semana 5",d:[
+  {f:"Romantismo e Realismo",v:[
+   {t:"Romantismo na Literatura - ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128150;",u:"https://www.youtube.com/@professornoslen/search?query=romantismo+literatura+enem"},
+   {t:"Realismo e Machado de Assis - ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127913;",u:"https://www.youtube.com/@professornoslen/search?query=realismo+machado+assis+enem"},
+   {t:"Romantismo e Realismo - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=romantismo+realismo+enem"},
+  ],at:"Compare romance do sec. XIX com novela da TV atual",au:"https://www.youtube.com/@professornoslen/search?query=romantismo+realismo",ds:"Identifique caracteristicas romanticas que ainda existem hoje"},
+  {f:"Trigonometria e Geometria Analitica",v:[
+   {t:"Trigonometria - ENEM",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=trigonometria+enem"},
+   {t:"Geometria Analitica - ENEM",c:"Xequemat",d:"ver duracao",e:"&#128506;",u:"https://www.youtube.com/@xequematenem/search?query=geometria+analitica+enem"},
+   {t:"Trigonometria e Analitica - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=trigonometria+geometria+analitica+enem"},
+  ],at:"Meca a altura de um predio usando sombra e angulo!",au:"https://www.youtube.com/@xequematenem/search?query=trigonometria+pratico",ds:"Resolva 3 questoes de trigonometria contra o tempo"},
+  {f:"Iluminismo e Filosofia",v:[
+   {t:"Iluminismo - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128161;",u:"https://www.youtube.com/@seliganessahistoria/search?query=iluminismo+enem"},
+   {t:"Filosofia Grega - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127981;",u:"https://www.youtube.com/@seliganessahistoria/search?query=filosofia+grega+enem"},
+   {t:"Iluminismo e Filosofia - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=iluminismo+filosofia+enem"},
+  ],at:"Debate socratico: O que e justo para nossa comunidade?",au:"https://www.youtube.com/@seliganessahistoria/search?query=iluminismo+filosofia",ds:"Qual filosofo explica melhor o Brasil de hoje?"},
+  {f:"DNA Genetica e Mendel",v:[
+   {t:"DNA e Replicacao - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#129516;",u:"https://www.youtube.com/@biologiatotal/search?query=dna+replicacao+enem"},
+   {t:"Leis de Mendel - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#127807;",u:"https://www.youtube.com/@biologiatotal/search?query=leis+mendel+enem"},
+   {t:"Genetica - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=genetica+mendel+enem"},
+  ],at:"Extraia DNA de morango com agua, detergente e alcool",au:"https://www.youtube.com/@biologiatotal/search?query=extracao+dna+morango",ds:"Monte modelo de DNA com macarrao e balinhas"},
+  {f:"Redacao Sem.5 + Espanhol",v:[
+   {t:"Erros mais comuns na redacao do ENEM",c:"Descomplica",d:"ver duracao",e:"&#10060;",u:"https://www.youtube.com/@Descomplica/search?query=erros+comuns+redacao+enem"},
+   {t:"Espanhol - Inferencia de Vocabulario ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+inferencia+vocabulario+enem"},
+   {t:"Redacao sobre fake news - modelo",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+fake+news+enem"},
+  ],at:"Escreva redacao sobre fake news com proposta completa",au:"https://www.youtube.com/@Descomplica/search?query=fake+news+redacao+enem",ds:"Resolva 2 questoes de espanhol inferindo pelo contexto"},
+ ]},
+
+ {n:6,e:"&#127963;",t:"Semana 6",d:[
+  {f:"Slam Poetry e Literatura Contemporanea",v:[{t:"Slam Poetry e Literatura Contemporanea ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127908;",u:"https://www.youtube.com/@professornoslen/search?query=slam+poetry+literatura+contemporanea+enem"},{t:"Literatura Contemporanea - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127925;",u:"https://www.youtube.com/@Descomplica/search?query=literatura+contemporanea+enem"},{t:"Slam Poetry na escola",c:"YouTube Educacao",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=slam+poetry+escola+atividade"}],at:"Cada aluno escreve e apresenta seu slam para a turma",au:"https://www.youtube.com/results?search_query=slam+poetry+escola",ds:"Vote no slam mais impactante - o que o torna poderoso?"},
+  {f:"Probabilidade e Analise Combinatoria",v:[{t:"Probabilidade - ENEM",c:"Xequemat",d:"ver duracao",e:"&#127922;",u:"https://www.youtube.com/@xequematenem/search?query=probabilidade+enem"},{t:"Analise Combinatoria - ENEM",c:"Xequemat",d:"ver duracao",e:"&#128290;",u:"https://www.youtube.com/@xequematenem/search?query=analise+combinatoria+enem"},{t:"Probabilidade e Combinatoria - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=probabilidade+combinatoria+enem"}],at:"Lance dados 20 vezes e compare com a teoria",au:"https://www.youtube.com/@xequematenem/search?query=probabilidade",ds:"Calcule probabilidade de cara 3 vezes seguidas"},
+  {f:"Durkheim Weber Marx e Cidadania",v:[{t:"Durkheim Weber Marx - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128203;",u:"https://www.youtube.com/@seliganessahistoria/search?query=durkheim+weber+marx+enem"},{t:"Cidadania e Direitos Humanos - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#9878;",u:"https://www.youtube.com/@seliganessahistoria/search?query=cidadania+direitos+humanos+enem"},{t:"Sociologia - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=sociologia+enem+questoes"}],at:"Apresentacao de 3 min por grupo sobre cada sociologo",au:"https://www.youtube.com/@seliganessahistoria/search?query=sociologia+classsicos",ds:"Mapa mental comparando os 3 pensadores"},
+  {f:"Termologia e Eletrodinamica",v:[{t:"Termologia - ENEM",c:"Descomplica",d:"ver duracao",e:"&#127777;",u:"https://www.youtube.com/@Descomplica/search?query=termologia+enem"},{t:"Eletrodinamica - ENEM",c:"Descomplica",d:"ver duracao",e:"&#9889;",u:"https://www.youtube.com/@Descomplica/search?query=eletrodinamica+enem"},{t:"Termologia e Eletrodinamica - questoes",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=termologia+eletrodinamica+enem"}],at:"Monte circuito com pilha e LED + explique transferencia de calor",au:"https://www.youtube.com/@Descomplica/search?query=termologia+eletrodinamica",ds:"Explique como funciona uma garrafa termica"},
+  {f:"Redacao Sem.6 + Espanhol",v:[{t:"Redacao - Racismo Estrutural ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+racismo+estrutural+enem"},{t:"Espanhol - Verbos e Tempos Verbais",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+verbos+enem"},{t:"Filosofia na pratica - Matrix",c:"YouTube Educacao",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=matrix+filosofia+livre+arbitrio+debate+escola"}],at:"Debata Matrix e conecte com os filosofos estudados",au:"https://www.youtube.com/@seliganessahistoria/search?query=filosofia+debate",ds:"Resolva 2 questoes de espanhol com foco em verbos"},
+ ]},
+ {n:7,e:"&#9999;",t:"Semana 7",d:[
+  {f:"Regionalismo e Vidas Secas",v:[{t:"Regionalismo e Vidas Secas ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127797;",u:"https://www.youtube.com/@professornoslen/search?query=regionalismo+vidas+secas+enem"},{t:"Vidas Secas - analise ENEM",c:"Descomplica",d:"ver duracao",e:"&#127806;",u:"https://www.youtube.com/@Descomplica/search?query=vidas+secas+enem"},{t:"Literatura Regionalista - questoes",c:"Professor Noslen",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@professornoslen/search?query=literatura+regionalista+questoes"}],at:"Leitura de trecho de Vidas Secas e debate",au:"https://www.youtube.com/@professornoslen/search?query=vidas+secas",ds:"Compare a seca do romance com desafios climaticos atuais"},
+  {f:"Graficos Tabelas e Porcentagem",v:[{t:"Leitura de Graficos e Tabelas ENEM",c:"Xequemat",d:"ver duracao",e:"&#128201;",u:"https://www.youtube.com/@xequematenem/search?query=graficos+tabelas+enem"},{t:"Porcentagem e Proporcionalidade ENEM",c:"Xequemat",d:"ver duracao",e:"&#128185;",u:"https://www.youtube.com/@xequematenem/search?query=porcentagem+proporcionalidade+enem"},{t:"Graficos e Porcentagem - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=graficos+porcentagem+enem"}],at:"Leia graficos de noticias reais e converta tabela em grafico",au:"https://www.youtube.com/@xequematenem/search?query=graficos+tabelas",ds:"Transforme tabela de dados reais em grafico a mao"},
+  {f:"Populacao e Migracoes",v:[{t:"Migracoes no Brasil - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#9992;",u:"https://www.youtube.com/@seliganessahistoria/search?query=migracoes+brasil+enem"},{t:"Transicao Demografica - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128101;",u:"https://www.youtube.com/@seliganessahistoria/search?query=transicao+demografica+enem"},{t:"Populacao - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=populacao+migracoes+enem"}],at:"Pesquise de onde vieram as familias da turma",au:"https://www.youtube.com/@seliganessahistoria/search?query=migracoes+populacao",ds:"Crie um grafico de barras com as origens da turma"},
+  {f:"Estequiometria e Reacoes Organicas",v:[{t:"Estequiometria - ENEM",c:"Descomplica",d:"ver duracao",e:"&#9878;",u:"https://www.youtube.com/@Descomplica/search?query=estequiometria+enem"},{t:"Reacoes Organicas - ENEM",c:"Descomplica",d:"ver duracao",e:"&#129510;",u:"https://www.youtube.com/@Descomplica/search?query=reacoes+organicas+enem"},{t:"Quimica - questoes ENEM",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=estequiometria+questoes+enem"}],at:"Calcule ingredientes para bolo para toda a turma",au:"https://www.youtube.com/@Descomplica/search?query=estequiometria+pratica",ds:"Fabrique sabao caseiro e explique a saponificacao"},
+  {f:"Redacao Sem.7 + Espanhol",v:[{t:"Desenvolvimento da Redacao ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=desenvolvimento+redacao+enem"},{t:"Espanhol - Ironia e Figuras de Linguagem",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+ironia+figuras"},{t:"Desigualdade social Brasil - debate",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=desigualdade+social+brasil"}],at:"Assista Que Horas Ela Volta e debata desigualdade",au:"https://www.youtube.com/@Descomplica/search?query=desigualdade+redacao+enem",ds:"Resolva 2 questoes de espanhol com ironia"},
+ ]},
+ {n:8,e:"&#129516;",t:"Semana 8",d:[
+  {f:"Ondas Optica e Espelhos",v:[{t:"Ondas Mecanicas - ENEM",c:"Descomplica",d:"ver duracao",e:"〰",u:"https://www.youtube.com/@Descomplica/search?query=ondas+mecanicas+enem"},{t:"Optica e Espelhos - ENEM",c:"Descomplica",d:"ver duracao",e:"&#129704;",u:"https://www.youtube.com/@Descomplica/search?query=optica+espelhos+enem"},{t:"Fisica - Ondas e Optica questoes",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=ondas+optica+enem"}],at:"Experimento com espelhos e colheres: por que a imagem inverte?",au:"https://www.youtube.com/@Descomplica/search?query=optica+espelhos+experimento",ds:"Explique a inversao nos espelhos concavos"},
+  {f:"Evolucao e Biotecnologia",v:[{t:"Teoria da Evolucao - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#129422;",u:"https://www.youtube.com/@biologiatotal/search?query=teoria+evolucao+enem"},{t:"Biotecnologia e CRISPR - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#128300;",u:"https://www.youtube.com/@biologiatotal/search?query=biotecnologia+crispr+enem"},{t:"Evolucao - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=evolucao+biotecnologia+enem"}],at:"Debate: vacinas, transgenicos e CRISPR",au:"https://www.youtube.com/@biologiatotal/search?query=biotecnologia+etica",ds:"Pesquise e apresente 1 avanco recente da biotecnologia"},
+  {f:"Desigualdade Social e SUS",v:[{t:"Desigualdade Social no Brasil - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128202;",u:"https://www.youtube.com/@seliganessahistoria/search?query=desigualdade+social+enem"},{t:"SUS e Saude Publica - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127973;",u:"https://www.youtube.com/@seliganessahistoria/search?query=sus+saude+publica+enem"},{t:"Atualidades Sociais - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=atualidades+desigualdade+enem"}],at:"Analise infograficos do IBGE sobre desigualdade",au:"https://www.youtube.com/@seliganessahistoria/search?query=desigualdade+social",ds:"Crie um infografico sobre desigualdade na sua cidade"},
+  {f:"Ditadura e Redemocratizacao",v:[{t:"Ditadura Militar no Brasil - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#129686;",u:"https://www.youtube.com/@seliganessahistoria/search?query=ditadura+militar+brasil+enem"},{t:"Redemocratizacao e Constituicao 1988",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128220;",u:"https://www.youtube.com/@seliganessahistoria/search?query=redemocratizacao+constituicao+1988"},{t:"Ditadura - questoes ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=ditadura+militar+enem"}],at:"Linha do tempo: ditadura a redemocratizacao",au:"https://www.youtube.com/@seliganessahistoria/search?query=ditadura+redemocratizacao",ds:"Conecte fatos da ditadura com os direitos da Constituicao"},
+  {f:"Redacao Sem.8 + Espanhol",v:[{t:"Redacao sobre Biotecnologia Etica",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+biotecnologia+etica"},{t:"Espanhol - Texto Cientifico ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+texto+cientifico"},{t:"Jurassic Park - DNA educativo",c:"Cinema/Educativo",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=jurassic+park+dna+clonagem+educativo+escola"}],at:"Debate: clonagem e etica cientifica",au:"https://www.youtube.com/@Descomplica/search?query=biotecnologia+etica+redacao",ds:"Resolva 2 questoes de espanhol com texto cientifico"},
+ ]},
+ {n:9,e:"&#128240;",t:"Semana 9",d:[
+  {f:"Texto Publicitario e Semiotica",v:[{t:"Texto Publicitario e Semiotica - ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128250;",u:"https://www.youtube.com/@professornoslen/search?query=texto+publicitario+semiotica+enem"},{t:"Linguagem Visual - ENEM",c:"Descomplica",d:"ver duracao",e:"&#127912;",u:"https://www.youtube.com/@Descomplica/search?query=linguagem+visual+semiotica+enem"},{t:"Texto publicitario - questoes",c:"Professor Noslen",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@professornoslen/search?query=texto+publicitario+questoes+enem"}],at:"Analise 3 propagandas reais: publico, objetivo e recursos",au:"https://www.youtube.com/@professornoslen/search?query=publicidade+linguagem+enem",ds:"Crie um anuncio usando recursos persuasivos"},
+  {f:"Lancamentos e Eletricidade",v:[{t:"Lancamento Obliquo - ENEM",c:"Descomplica",d:"ver duracao",e:"&#9918;",u:"https://www.youtube.com/@Descomplica/search?query=lancamento+obliquo+enem"},{t:"Circuitos Eletricos - ENEM",c:"Descomplica",d:"ver duracao",e:"&#128268;",u:"https://www.youtube.com/@Descomplica/search?query=circuitos+eletricos+enem"},{t:"Fisica - questoes mistas ENEM",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=lancamento+eletricidade+questoes+enem"}],at:"Monte um circuito e calcule a conta de luz de casa",au:"https://www.youtube.com/@Descomplica/search?query=circuito+eletrico+experimento",ds:"Resolva 4 questoes de fisica mista"},
+  {f:"Diversidade Cultural e Heranca",v:[{t:"Diversidade Cultural Brasileira - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127752;",u:"https://www.youtube.com/@seliganessahistoria/search?query=diversidade+cultural+brasileira+enem"},{t:"Heranca Africana e Indigena - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#129680;",u:"https://www.youtube.com/@seliganessahistoria/search?query=heranca+africana+indigena+enem"},{t:"Cultura e Identidade - questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=diversidade+cultural+identidade+enem"}],at:"Cada aluno apresenta uma heranca cultural da familia",au:"https://www.youtube.com/@seliganessahistoria/search?query=diversidade+cultural",ds:"Crie um mini-relato da historia cultural da sua familia"},
+  {f:"Solucoes Quimicas e Acidos Bases",v:[{t:"Solucoes Quimicas - ENEM",c:"Descomplica",d:"ver duracao",e:"&#129514;",u:"https://www.youtube.com/@Descomplica/search?query=solucoes+quimicas+enem"},{t:"Acidos Bases e pH - ENEM",c:"Descomplica",d:"ver duracao",e:"&#9879;",u:"https://www.youtube.com/@Descomplica/search?query=acidos+bases+ph+enem"},{t:"Quimica - questoes ENEM",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=solucoes+acidos+bases+enem"}],at:"Vulcao de bicarbonato: acido-base ao vivo!",au:"https://www.youtube.com/results?search_query=vulcao+bicarbonato+vinagre+experimento+escola",ds:"Teste o pH de 5 liquidos do dia a dia"},
+  {f:"Redacao Sem.9 + Espanhol",v:[{t:"Redacao sobre Educacao Direito - ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+educacao+direito+enem"},{t:"Espanhol - Texto Literario ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+texto+literario"},{t:"Documentario meio ambiente",c:"YouTube Educacao",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=documentario+biomas+brasileiros+curto+escola"}],at:"Escreva redacao sobre meio ambiente",au:"https://www.youtube.com/@Descomplica/search?query=redacao+meio+ambiente+enem",ds:"Resolva 2 questoes de espanhol com texto literario"},
+ ]},
+ {n:10,e:"&#128257;",t:"Semana 10 - Revisao I",d:[
+  {f:"Revisao Completa: Linguagens",v:[{t:"Revisao Linguagens ENEM - tudo",c:"Professor Noslen",d:"ver duracao",e:"&#128218;",u:"https://www.youtube.com/@professornoslen/search?query=revisao+linguagens+enem"},{t:"Top erros em Linguagens ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=revisao+linguagens+erros+enem"}],at:"Resolva 15 questoes de Linguagens de provas anteriores",au:"https://www.youtube.com/@professornoslen/search?query=simulado+linguagens+enem",ds:"Identifique seus 3 maiores pontos fracos"},
+  {f:"Revisao Completa: Matematica",v:[{t:"Revisao Matematica ENEM completo",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=revisao+matematica+enem"},{t:"Top questoes dificeis de Matematica",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=questoes+dificeis+matematica+enem"}],at:"Simulado: 20 questoes de Matematica cronometrado",au:"https://www.youtube.com/@xequematenem/search?query=simulado+matematica+enem",ds:"Monte guia de formulas essenciais"},
+  {f:"Revisao: Historia do Brasil",v:[{t:"Revisao Historia Brasil - ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127963;",u:"https://www.youtube.com/@seliganessahistoria/search?query=revisao+historia+brasil+enem"},{t:"Historia - questoes ENEM comentadas",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=historia+questoes+enem+comentadas"}],at:"Linha do tempo: Brasil colonial a 1988",au:"https://www.youtube.com/@seliganessahistoria/search?query=historia+brasil+linha+do+tempo",ds:"Conecte 3 fatos historicos com problemas sociais atuais"},
+  {f:"Revisao: Bio e Quimica",v:[{t:"Revisao Biologia ENEM",c:"Biologia Total",d:"ver duracao",e:"&#129516;",u:"https://www.youtube.com/@biologiatotal/search?query=revisao+biologia+enem"},{t:"Revisao Quimica ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=revisao+quimica+enem"}],at:"Quiz relampago: Bio e Quimica em equipes",au:"https://kahoot.com/",ds:"Crie 5 questoes para desafiar outro grupo"},
+  {f:"Redacao Sem.10 + Espanhol",v:[{t:"Correcao ao vivo: redacao nota 1000",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=correcao+redacao+nota+1000+enem"},{t:"Espanhol - Discurso Direto Indireto",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+discurso+direto+indireto"},{t:"Motivacao ENEM - metade do caminho",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=motivacao+enem"}],at:"Redacao em 50 min + LANCHE DE CELEBRACAO!",au:"https://www.youtube.com/@Descomplica/search?query=simulado+redacao+enem",ds:"Resolva 2 questoes de espanhol. METADE DO CAMINHO, Victor!"},
+ ]},
+ {n:11,e:"&#127919;",t:"Semana 11 - Revisao II",d:[
+  {f:"Literatura: Revisao dos Movimentos",v:[{t:"Revisao Literatura Brasileira ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128218;",u:"https://www.youtube.com/@professornoslen/search?query=revisao+literatura+brasileira+enem"},{t:"Movimentos Literarios - questoes ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128269;",u:"https://www.youtube.com/@professornoslen/search?query=movimentos+literarios+questoes+enem"},{t:"Literatura - top questoes",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=literatura+top+questoes+enem"}],at:"Cada aluno explica um movimento literario para a turma",au:"https://www.youtube.com/@professornoslen/search?query=literatura+revisao",ds:"Identifique 3 movimentos em trechos de textos"},
+  {f:"Revisao: Probabilidade e Geometria",v:[{t:"Donald no Pais da Matematica (Disney)",c:"YouTube",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=donald+pais+matematica+disney+completo"},{t:"Probabilidade e Geometria - revisao",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=probabilidade+geometria+revisao+enem"}],at:"Assista Donald e identifique geometria nas cenas",au:"https://www.youtube.com/@xequematenem/search?query=geometria+probabilidade+enem",ds:"Resolva 10 questoes mistas de Geometria e Probabilidade"},
+  {f:"Revisao: Geografia Fisica e Humana",v:[{t:"Revisao Completa: Geografia ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127757;",u:"https://www.youtube.com/@seliganessahistoria/search?query=revisao+geografia+enem"},{t:"Geografia - questoes comentadas",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=geografia+questoes+enem"},{t:"Biomas e Urbanizacao - revisao",c:"Descomplica",d:"ver duracao",e:"&#128506;",u:"https://www.youtube.com/@Descomplica/search?query=biomas+urbanizacao+revisao+enem"}],at:"Simulado: 15 questoes de Geografia cronometrado",au:"https://www.youtube.com/@seliganessahistoria/search?query=simulado+geografia+enem",ds:"Identifique os 2 temas de Geografia que mais errou"},
+  {f:"Revisao: Fisica completa",v:[{t:"Revisao Fisica ENEM completo",c:"Descomplica",d:"ver duracao",e:"&#9889;",u:"https://www.youtube.com/@Descomplica/search?query=revisao+fisica+enem+completo"},{t:"Fisica - top questoes dificeis",c:"Me Salva",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@MeSalva/search?query=fisica+questoes+dificeis+enem"}],at:"Identifique fenomenos fisicos em cenas de filmes",au:"https://www.youtube.com/@Descomplica/search?query=fisica+revisao+enem",ds:"Monte resumo visual de Fisica em meia pagina"},
+  {f:"Redacao Sem.11 + Espanhol",v:[{t:"Redacao - Papel do Estado ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+estado+direitos+enem"},{t:"Espanhol - Anuncios Publicidade",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+publicidade+anuncios+enem"},{t:"Ciencias Humanas - revisao ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=ciencias+humanas+revisao+enem"}],at:"Escreva redacao sobre direitos sociais",au:"https://www.youtube.com/@Descomplica/search?query=redacao+direitos+sociais",ds:"Resolva 2 questoes de espanhol com texto publicitario"},
+ ]},
+ {n:12,e:"&#128640;",t:"Semana 12 - Simulado Geral",d:[
+  {f:"Simulado Linguagens - 45 questoes",v:[{t:"Gabarito Linguagens ENEM - comentado",c:"Professor Noslen",d:"ver duracao",e:"&#128221;",u:"https://www.youtube.com/@professornoslen/search?query=gabarito+linguagens+enem"},{t:"Estrategias para Linguagens ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=estrategias+linguagens+enem"}],at:"45 questoes cronometradas e correcao em grupo",au:"https://www.youtube.com/@professornoslen/search?query=simulado+linguagens+enem",ds:"Identifique os 3 maiores pontos fracos"},
+  {f:"Simulado Matematica - 45 questoes",v:[{t:"Gabarito Matematica ENEM - comentado",c:"Xequemat",d:"ver duracao",e:"&#128221;",u:"https://www.youtube.com/@xequematenem/search?query=gabarito+matematica+enem"},{t:"Estrategias para Matematica ENEM",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=estrategias+matematica+enem"}],at:"45 questoes cronometradas e correcao em grupo",au:"https://www.youtube.com/@xequematenem/search?query=simulado+matematica+enem",ds:"Monte plano de revisao baseado nos erros"},
+  {f:"Simulado Humanas - 45 questoes",v:[{t:"Gabarito Humanas ENEM - comentado",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128221;",u:"https://www.youtube.com/@seliganessahistoria/search?query=gabarito+humanas+enem"},{t:"Estrategias para Humanas ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=estrategias+humanas+enem"}],at:"45 questoes cronometradas e correcao em grupo",au:"https://www.youtube.com/@seliganessahistoria/search?query=simulado+humanas+enem",ds:"Anote todos os temas de Humanas que erraram"},
+  {f:"Simulado Natureza - 45 questoes",v:[{t:"Gabarito Natureza ENEM - comentado",c:"Descomplica",d:"ver duracao",e:"&#128221;",u:"https://www.youtube.com/@Descomplica/search?query=gabarito+ciencias+natureza+enem"},{t:"Estrategias para Natureza ENEM",c:"Biologia Total",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@biologiatotal/search?query=estrategias+natureza+enem"}],at:"45 questoes cronometradas e correcao em grupo",au:"https://www.youtube.com/@Descomplica/search?query=simulado+ciencias+natureza+enem",ds:"Qual disciplina de Natureza precisa mais revisao?"},
+  {f:"Redacao Sem.12 + Espanhol",v:[{t:"Redacao - Violencia Urbana ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+violencia+urbana+enem"},{t:"Espanhol - Intertextualidade ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+intertextualidade+enem"},{t:"Motivacao: ENEM simulado geral",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=motivacao+simulado+enem"}],at:"Redacao em 50 min e lanche de celebracao!",au:"https://www.youtube.com/@Descomplica/search?query=simulado+redacao+enem",ds:"Mostre sua evolucao com grafico de notas"},
+ ]},
+ {n:13,e:"&#128295;",t:"Semana 13 - Pontos Fracos I",d:[
+  {f:"Pontos Fracos: Linguagens",v:[{t:"Erros comuns em Linguagens ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128216;",u:"https://www.youtube.com/@professornoslen/search?query=erros+comuns+linguagens+enem"},{t:"Linguagens - questoes dificeis",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=questoes+dificeis+linguagens+enem"},{t:"Literatura revisao dirigida",c:"Professor Noslen",d:"ver duracao",e:"&#128218;",u:"https://www.youtube.com/@professornoslen/search?query=literatura+revisao+dirigida"}],at:"Refaca as questoes de Linguagens que errou no simulado",au:"https://www.youtube.com/@professornoslen/search?query=revisao+linguagens+questoes",ds:"Ensine o tema que mais errou para um colega"},
+  {f:"Pontos Fracos: Matematica",v:[{t:"Questoes dificeis Matematica ENEM",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=questoes+dificeis+matematica+enem"},{t:"Matematica - erros mais comuns",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=matematica+erros+comuns+enem"},{t:"Funcoes e Geometria - revisao",c:"Xequemat",d:"ver duracao",e:"&#9989;",u:"https://www.youtube.com/@xequematenem/search?query=funcoes+geometria+revisao+enem"}],at:"Aula colaborativa: quem sabe ensina quem nao sabe",au:"https://www.youtube.com/@xequematenem/search?query=matematica+revisao",ds:"Monte guia de sobrevivencia de Matematica"},
+  {f:"Pontos Fracos: Humanas",v:[{t:"Erros mais comuns em Humanas ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127757;",u:"https://www.youtube.com/@seliganessahistoria/search?query=erros+humanas+enem"},{t:"Humanas - questoes comentadas",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=humanas+questoes+comentadas"},{t:"Historia e Geografia - revisao",c:"Descomplica",d:"ver duracao",e:"&#127963;",u:"https://www.youtube.com/@Descomplica/search?query=historia+geografia+revisao+enem"}],at:"Mapa mental coletivo dos erros mais comuns",au:"https://www.youtube.com/@seliganessahistoria/search?query=revisao+humanas+erros",ds:"Explique o tema de Humanas que mais errou"},
+  {f:"Pontos Fracos: Natureza",v:[{t:"Revisao Natureza - erros frequentes",c:"Biologia Total",d:"ver duracao",e:"&#129514;",u:"https://www.youtube.com/@biologiatotal/search?query=revisao+natureza+erros+enem"},{t:"Natureza - questoes comentadas",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=natureza+questoes+comentadas+enem"},{t:"Bio Fisica Quimica - revisao express",c:"Me Salva",d:"ver duracao",e:"&#9889;",u:"https://www.youtube.com/@MeSalva/search?query=biologia+fisica+quimica+revisao+enem"}],at:"Experimentos-relampago para fixar os erros",au:"https://www.youtube.com/@biologiatotal/search?query=experimentos+escola+natureza",ds:"Crie resumo visual colorido do que mais errou"},
+  {f:"Redacao Sem.13 + Espanhol",v:[{t:"Redacao - Envelhecimento Populacao ENEM 2025",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+envelhecimento+populacao+enem"},{t:"Espanhol - Simulado 5 questoes",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=simulado+espanhol+enem"},{t:"Revisao pontos fracos - motivacao",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=revisao+pontos+fracos+enem"}],at:"Redacao sobre envelhecimento e simulado espanhol",au:"https://www.youtube.com/@Descomplica/search?query=envelhecimento+redacao+enem",ds:"Corrija redacao e espanhol com a rubrica completa"},
+ ]},
+ {n:14,e:"&#128170;",t:"Semana 14 - Pontos Fracos II",d:[
+  {f:"Redacao: Revisao de Textos Anteriores",v:[{t:"Como melhorar a redacao ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=melhorar+redacao+enem"},{t:"Redacoes nota 1000 comentadas",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=redacoes+nota+1000+enem"},{t:"5 elementos proposta perfeita",c:"Descomplica",d:"ver duracao",e:"&#128295;",u:"https://www.youtube.com/@Descomplica/search?query=5+elementos+proposta+intervencao+enem"}],at:"Releia e reescreva sua melhor redacao do semestre",au:"https://www.youtube.com/@Descomplica/search?query=revisao+redacao+melhorar",ds:"Troque a redacao reescrita para correcao final"},
+  {f:"Matematica: Questoes ENEM dificeis",v:[{t:"10 formulas mais cobradas ENEM",c:"Xequemat",d:"ver duracao",e:"&#128203;",u:"https://www.youtube.com/@xequematenem/search?query=formulas+mais+cobradas+enem"},{t:"Questoes dificeis ENEM comentadas",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=questoes+dificeis+enem"},{t:"Estrategias para gabaritar Matematica",c:"Descomplica",d:"ver duracao",e:"&#127919;",u:"https://www.youtube.com/@Descomplica/search?query=estrategias+gabaritar+matematica+enem"}],at:"Resolva as 10 questoes de Matematica mais dificeis",au:"https://www.youtube.com/@xequematenem/search?query=questoes+dificeis+matematica",ds:"Explique para um colega as questoes que acertou"},
+  {f:"Atualidades e Temas de 2026",v:[{t:"Atualidades para o ENEM 2026",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128240;",u:"https://www.youtube.com/@seliganessahistoria/search?query=atualidades+enem+2026"},{t:"Temas em alta ENEM 2026",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=temas+em+alta+enem+2026"},{t:"Bets neurodiversidade IA - debate",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#129302;",u:"https://www.youtube.com/@seliganessahistoria/search?query=bets+neurodiversidade+ia+enem"}],at:"Pesquise 3 noticias recentes e conecte com o ENEM",au:"https://www.youtube.com/@seliganessahistoria/search?query=atualidades+2026+enem",ds:"Escreva um paragrafo de desenvolvimento sobre cada noticia"},
+  {f:"Biologia Celular e Fisiologia",v:[{t:"Biologia Celular - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#128300;",u:"https://www.youtube.com/@biologiatotal/search?query=biologia+celular+enem"},{t:"Fisiologia Animal - ENEM",c:"Biologia Total",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@biologiatotal/search?query=fisiologia+animal+enem"},{t:"Histologia e Citologia - ENEM",c:"Descomplica",d:"ver duracao",e:"&#129519;",u:"https://www.youtube.com/@Descomplica/search?query=histologia+citologia+enem"}],at:"Quiz sobre biologia celular em equipes",au:"https://kahoot.com/",ds:"Monte cartaz de resumo visual de Biologia Celular"},
+  {f:"Redacao Sem.14 + Espanhol",v:[{t:"Redacao - Apostas Esportivas Bets",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+apostas+esportivas+bets"},{t:"Espanhol - Estrategias ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=estrategias+espanhol+enem"},{t:"Coach Carter motivacao",c:"YouTube",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=coach+carter+trailer+legendado"}],at:"Escreva sobre bets e treine estrategias de espanhol",au:"https://www.youtube.com/@Descomplica/search?query=bets+apostas+redacao+enem",ds:"Resolva 3 questoes de espanhol usando so as estrategias"},
+ ]},
+ {n:15,e:"&#127937;",t:"Semana 15 - Pre-Reta Final",d:[
+  {f:"Revisao Integrada: Linguagens",v:[{t:"Revisao Total Linguagens ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128218;",u:"https://www.youtube.com/@professornoslen/search?query=revisao+total+linguagens+enem"},{t:"Todos os movimentos literarios",c:"Professor Noslen",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@professornoslen/search?query=movimentos+literarios+revisao+total"}],at:"Simulado: 20 questoes de Linguagens com analise",au:"https://www.youtube.com/@professornoslen/search?query=simulado+linguagens+enem",ds:"Identifique ponto mais fraco e estude 15 min extras"},
+  {f:"Revisao Integrada: Matematica",v:[{t:"Revisao Total Matematica ENEM",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=revisao+total+matematica+enem"},{t:"Simulado Matematica comentado",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=simulado+matematica+comentado+enem"}],at:"Resolva 20 questoes mistas de Matematica",au:"https://www.youtube.com/@xequematenem/search?query=simulado+matematica+enem",ds:"Monte caderno de ouro com todas as formulas"},
+  {f:"Revisao Integrada: Humanas",v:[{t:"Humanas completo - revisao final",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127757;",u:"https://www.youtube.com/@seliganessahistoria/search?query=humanas+revisao+final+enem"},{t:"Questoes dificeis de Humanas ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=questoes+dificeis+humanas+enem"}],at:"Simulado: 20 questoes de Humanas",au:"https://www.youtube.com/@seliganessahistoria/search?query=simulado+humanas+enem",ds:"Conecte temas historicos com atualidades de 2026"},
+  {f:"Revisao Integrada: Natureza",v:[{t:"Fisica Quimica e Bio - revisao final",c:"Descomplica",d:"ver duracao",e:"&#129514;",u:"https://www.youtube.com/@Descomplica/search?query=fisica+quimica+biologia+revisao+final+enem"},{t:"Natureza - top questoes ENEM",c:"Biologia Total",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@biologiatotal/search?query=questoes+natureza+enem"}],at:"Simulado: 20 questoes de Natureza",au:"https://www.youtube.com/@Descomplica/search?query=simulado+natureza+enem",ds:"Resume Natureza inteira em 1 folha com esquemas"},
+  {f:"Redacao Sem.15 + Espanhol",v:[{t:"Redacao sobre Literatura Cidadao",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+literatura+formacao+cidadao"},{t:"Espanhol - Revisao Final ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=revisao+final+espanhol+enem"},{t:"Pré-reta final - motivacao",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=pre+reta+final+motivacao+enem"}],at:"Redacao completa em 50 min e simulado espanhol",au:"https://www.youtube.com/@Descomplica/search?query=simulado+redacao+espanhol",ds:"Corrija com a rubrica completa do ENEM"},
+ ]},
+ {n:16,e:"&#128293;",t:"Semana 16 - Reta Final I",d:[
+  {f:"Reta Final: Linguagens Dificeis",v:[{t:"Top questoes dificeis Linguagens ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128216;",u:"https://www.youtube.com/@professornoslen/search?query=top+questoes+dificeis+linguagens"},{t:"Linguagens - gabarito reta final",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=gabarito+linguagens+reta+final+enem"}],at:"Questoes dificeis de Linguagens com analise detalhada",au:"https://www.youtube.com/@professornoslen/search?query=questoes+dificeis+linguagens",ds:"Monte mini-dicionario de termos de Linguagens"},
+  {f:"Reta Final: Matematica Dificil",v:[{t:"20 questoes dificeis Matematica ENEM",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=questoes+dificeis+matematica+enem"},{t:"Matematica reta final - dicas",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=matematica+reta+final+enem"}],at:"Questoes dificeis de Matematica e revisao de formulas",au:"https://www.youtube.com/@xequematenem/search?query=questoes+dificeis+matematica",ds:"Explique para si mesmo cada questao que errou"},
+  {f:"Reta Final: Humanas Dificil",v:[{t:"20 questoes dificeis Humanas ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127757;",u:"https://www.youtube.com/@seliganessahistoria/search?query=questoes+dificeis+humanas+enem"},{t:"Humanas reta final - estrategias",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=humanas+reta+final+estrategias"}],at:"Questoes dificeis de Humanas focando em analise de fonte",au:"https://www.youtube.com/@seliganessahistoria/search?query=questoes+dificeis+humanas",ds:"Identifique padroes nas questoes de Humanas"},
+  {f:"Reta Final: Natureza Dificil",v:[{t:"20 questoes dificeis Natureza ENEM",c:"Descomplica",d:"ver duracao",e:"&#129514;",u:"https://www.youtube.com/@Descomplica/search?query=questoes+dificeis+natureza+enem"},{t:"Natureza reta final - dicas",c:"Biologia Total",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@biologiatotal/search?query=natureza+reta+final+enem"}],at:"Questoes dificeis de Natureza com foco em raciocinio",au:"https://www.youtube.com/@Descomplica/search?query=questoes+dificeis+natureza",ds:"Monte resumo das formulas de Fisica e Quimica"},
+  {f:"Redacao Sem.16 + Espanhol",v:[{t:"Redacao simulado livre ENEM",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=simulado+livre+redacao+enem"},{t:"Espanhol - Gabarito ENEM 2024",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=gabarito+espanhol+enem+2024"},{t:"Carta de motivacao para o ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=motivacao+carta+enem"}],at:"Redacao livre em 50 min - aplique tudo que aprendeu!",au:"https://www.youtube.com/@Descomplica/search?query=redacao+enem+pratica",ds:"Compare gabarito de espanhol com o oficial"},
+ ]},
+ {n:17,e:"&#9889;",t:"Semana 17 - Reta Final II",d:[
+  {f:"Provas Completas: Linguagens 2023/24",v:[{t:"Prova Linguagens ENEM 2023 comentada",c:"Professor Noslen",d:"ver duracao",e:"&#128216;",u:"https://www.youtube.com/@professornoslen/search?query=prova+linguagens+enem+2023+comentada"},{t:"Linguagens ENEM 2024 - ultimas dicas",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=linguagens+enem+2024+ultimas+dicas"}],at:"Prova completa de Linguagens 2023 ou 2024 cronometrada",au:"https://www.youtube.com/@professornoslen/search?query=prova+linguagens+enem",ds:"Calcule aproveitamento e defina meta para o dia da prova"},
+  {f:"Provas Completas: Matematica 2023/24",v:[{t:"Prova Matematica ENEM 2023 comentada",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=prova+matematica+enem+2023"},{t:"Matematica ENEM 2024 - ultimas dicas",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=matematica+enem+2024+dicas"}],at:"Prova completa de Matematica 2023 ou 2024 cronometrada",au:"https://www.youtube.com/@xequematenem/search?query=prova+matematica+enem",ds:"Anote formulas para revisar na manha da prova"},
+  {f:"Provas Completas: Humanas 2023/24",v:[{t:"Prova Humanas ENEM 2023 comentada",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127757;",u:"https://www.youtube.com/@seliganessahistoria/search?query=prova+humanas+enem+2023"},{t:"Humanas ENEM 2024 - ultimas dicas",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=humanas+enem+2024+dicas"}],at:"Prova completa de Humanas 2023 ou 2024 cronometrada",au:"https://www.youtube.com/@seliganessahistoria/search?query=prova+humanas+enem",ds:"Calcule tempo medio por questao"},
+  {f:"Provas Completas: Natureza 2023/24",v:[{t:"Prova Natureza ENEM 2023 comentada",c:"Descomplica",d:"ver duracao",e:"&#129514;",u:"https://www.youtube.com/@Descomplica/search?query=prova+natureza+enem+2023"},{t:"Natureza ENEM 2024 - ultimas dicas",c:"Biologia Total",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@biologiatotal/search?query=natureza+enem+2024+dicas"}],at:"Prova completa de Natureza 2023 ou 2024 cronometrada",au:"https://www.youtube.com/@Descomplica/search?query=prova+natureza+enem",ds:"Monte checklist para revisar na vespera da prova"},
+  {f:"Redacao Sem.17 + Espanhol",v:[{t:"Redacao - Neurodiversidade nota 1000",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=redacao+neurodiversidade+nota+1000"},{t:"Espanhol - Questoes Dificeis ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#127466;&#127480;",u:"https://www.youtube.com/@professornoslen/search?query=espanhol+questoes+dificeis+enem"},{t:"Coach Carter - motivacao",c:"YouTube",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/results?search_query=coach+carter+cena+motivacao+legendado"}],at:"Redacao mais importante do semestre - tema 2026",au:"https://www.youtube.com/@Descomplica/search?query=redacao+2026+temas",ds:"Gabarito comentado do espanhol mais recente"},
+ ]},
+ {n:18,e:"&#127942;",t:"Semana 18 - SEMANA DA PROVA",d:[
+  {f:"Vespera Dia 1: Revisao Leve",v:[{t:"Revisao leve Linguagens - vespera ENEM",c:"Professor Noslen",d:"ver duracao",e:"&#128216;",u:"https://www.youtube.com/@professornoslen/search?query=revisao+leve+linguagens+vespera+enem"},{t:"Tudo sobre o Dia 1 da prova ENEM",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=dia+1+prova+enem+dicas"}],at:"Releia apenas os resumos visuais - nao estude conteudo novo!",au:"https://www.youtube.com/@Descomplica/search?query=revisao+leve+vespera+enem",ds:"Prepare sua mochila: documento, lanche, caneta preta"},
+  {f:"Vespera Dia 1: Redacao Final",v:[{t:"Dicas de redacao para o dia da prova",c:"Descomplica",d:"ver duracao",e:"&#9999;",u:"https://www.youtube.com/@Descomplica/search?query=dicas+redacao+dia+da+prova+enem"},{t:"Revisao leve Humanas - vespera ENEM",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@seliganessahistoria/search?query=revisao+leve+humanas+vespera"}],at:"Releia suas 3 melhores redacoes do semestre",au:"https://www.youtube.com/@Descomplica/search?query=revisao+redacao+vespera+enem",ds:"Escreva 3 propostas de intervencao para temas variados"},
+  {f:"DIA 1 - Linguagens, Humanas e Redacao",v:[{t:"Dia 1 ENEM 2026 - o que esperar",c:"Descomplica",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@Descomplica/search?query=dia+1+enem+2026"},{t:"Motivacao: voce chegou ate aqui!",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#128170;",u:"https://www.youtube.com/@seliganessahistoria/search?query=motivacao+dia+da+prova+enem"}],at:"E O DIA! Cafe reforcado, cabeca no lugar, vai com tudo!",au:"https://www.youtube.com/@Descomplica/search?query=enem+dia+da+prova+dicas",ds:"Voce treinou 18 semanas. Confie no processo. VAI, VICTOR KAUA!"},
+  {f:"Vespera Dia 2: Matematica e Natureza",v:[{t:"Revisao leve Matematica - vespera ENEM",c:"Xequemat",d:"ver duracao",e:"&#128208;",u:"https://www.youtube.com/@xequematenem/search?query=revisao+leve+matematica+vespera"},{t:"Revisao leve Natureza - vespera ENEM",c:"Descomplica",d:"ver duracao",e:"&#129514;",u:"https://www.youtube.com/@Descomplica/search?query=revisao+leve+natureza+vespera+enem"}],at:"Releia apenas o caderno de formulas - nada novo!",au:"https://www.youtube.com/@xequematenem/search?query=vespera+dia+2+enem",ds:"Separe o material, descanse bem e durma cedo"},
+  {f:"DIA 2 - Matematica e Natureza",v:[{t:"Dia 2 ENEM 2026 - estrategias finais",c:"Xequemat",d:"ver duracao",e:"&#127909;",u:"https://www.youtube.com/@xequematenem/search?query=dia+2+enem+estrategias"},{t:"Celebracao: voce conseguiu, Victor!",c:"Se Liga Nessa Historia",d:"ver duracao",e:"&#127942;",u:"https://www.youtube.com/@seliganessahistoria/search?query=enem+aprovado+motivacao+celebracao"}],at:"ULTIMO DIA! Confie no treino, confie em voce!",au:"https://www.youtube.com/@Descomplica/search?query=enem+dia+2+prova+dicas",ds:"Depois da prova: celebre com quem voce ama. Voce merece, Victor!"},
+ ]},
 ];
-
-// ─── COUNTDOWN ───────────────────────────────────────────────────────────
-
-function updateCountdown() {
-  const enem = new Date('2026-11-08T08:00:00');
-  const start = new Date('2026-06-10T00:00:00');
-  const now = new Date();
-  const total = enem - start;
-  const remaining = enem - now;
-  const days = Math.max(0, Math.ceil(remaining / 86400000));
-  const pct = Math.min(100, Math.max(0, ((total - remaining) / total) * 100));
-  document.getElementById('days-count').textContent = days;
-  document.getElementById('days-label').textContent = days === 1 ? 'dia' : 'dias';
-  document.getElementById('prog-fill').style.width = pct.toFixed(1) + '%';
+</script>
+<script id="app">
+function updateCountdown(){
+  var e=new Date('2026-11-08T08:00:00'),s=new Date('2026-06-10T00:00:00'),n=new Date();
+  var t=e-s,r=e-n,d=Math.max(0,Math.ceil(r/86400000));
+  var p=Math.min(100,Math.max(0,((t-r)/t)*100));
+  document.getElementById('dc').textContent=d;
+  document.getElementById('dl').textContent=d===1?'dia':'dias';
+  document.getElementById('pf').style.width=p.toFixed(1)+'%';
 }
-updateCountdown();
-setInterval(updateCountdown, 60000);
+updateCountdown();setInterval(updateCountdown,60000);
 
-// ─── STATE ───────────────────────────────────────────────────────────────
+var aS=null,aD=0;
+function getSaved(){try{return JSON.parse(localStorage.getItem('vk_done')||'{}')}catch(e2){return{}}}
+function toggleDone(k){var d=getSaved();d[k]=!d[k];localStorage.setItem('vk_done',JSON.stringify(d))}
+function isDone(k){return!!getSaved()[k]}
 
-let activeSem = null;
-let activeDia = 0;
-
-function getSavedDone() {
-  try { return JSON.parse(localStorage.getItem('enem_done') || '{}'); } catch(e){ return {}; }
-}
-function toggleDone(key) {
-  const d = getSavedDone();
-  d[key] = !d[key];
-  localStorage.setItem('enem_done', JSON.stringify(d));
-}
-function isDone(key) { return !!getSavedDone()[key]; }
-
-// ─── RENDER SEMANAS GRID ─────────────────────────────────────────────────
-
-function renderGrid() {
-  const grid = document.getElementById('semanas-grid');
-  grid.innerHTML = '';
-  SEMANAS.forEach((s, i) => {
-    const cor = CORES[i];
-    const allDone = s.dias.every((d,di) => isDone(`${i}_${di}`));
-    const btn = document.createElement('button');
-    btn.className = 'semana-btn' + (activeSem === i ? ' active' : '');
-    btn.style.setProperty('--week-color', cor);
-    btn.innerHTML = `
-      <div class="emoji">${s.emoji}</div>
-      <div class="num">Sem. ${s.num}</div>
-      <div class="nome">${s.tema}</div>
-      ${allDone ? '<div class="done-badge">✅</div>' : ''}
-    `;
-    btn.addEventListener('click', () => {
-      activeSem = i;
-      activeDia = 0;
-      renderGrid();
-      renderDetail();
-      document.getElementById('detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    grid.appendChild(btn);
+function renderGrid(){
+  var g=document.getElementById('sg');g.innerHTML='';
+  SEMANAS.forEach(function(s,i){
+    var done=s.d.every(function(_,di){return isDone(i+'_'+di)});
+    var b=document.createElement('button');
+    b.className='sb'+(aS===i?' active':'');
+    b.innerHTML='<div class="se">'+s.e+'</div><div class="sn">Sem. '+s.n+'</div><div class="snm">'+s.t+'</div>'+(done?'<div class="sd">OK</div>':'');
+    b.addEventListener('click',function(idx){return function(){aS=idx;aD=0;renderGrid();renderDetail();document.getElementById('det').scrollIntoView({behavior:'smooth',block:'start'})}}(i));
+    g.appendChild(b);
   });
 }
 
-// ─── RENDER DETAIL ───────────────────────────────────────────────────────
+function esc(str){
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
-function renderDetail() {
-  const detail = document.getElementById('detail');
-  if (activeSem === null) { detail.className = 'detail'; return; }
-  detail.className = 'detail visible';
+function renderDetail(){
+  var det=document.getElementById('det');
+  if(aS===null){det.style.display='none';return;}
+  det.style.display='block';
+  var s=SEMANAS[aS],esp=ESP[aS],red=RED[aS],isSex=(aD===4);
 
-  const s = SEMANAS[activeSem];
-  const cor = CORES[activeSem];
-  const redTema = REDACAO_TEMAS[activeSem];
-  const isSexta = activeDia === 4;
+  var hdr=document.getElementById('shdr');
+  hdr.innerHTML='<div class="stag">Semana '+s.n+' de 18</div><h2>'+s.e+' '+esc(s.t)+'</h2><div class="sbadge">1 materia por dia | Redacao + Espanhol toda sexta</div>';
 
-  // Header
-  const hdr = document.getElementById('sem-header');
-  hdr.style.background = `linear-gradient(135deg, ${cor}, ${cor}cc)`;
-  hdr.innerHTML = `
-    <div class="sh-label">Semana ${s.num} de 18</div>
-    <h2>${s.emoji} ${s.tema}</h2>
-    <div class="redacao-badge">✍️ Redação toda sexta-feira</div>
-  `;
-
-  // Tabs
-  const tabs = document.getElementById('dias-tabs');
-  tabs.innerHTML = '';
-  s.dias.forEach((d, di) => {
-    const key = `${activeSem}_${di}`;
-    const done = isDone(key);
-    const tab = document.createElement('button');
-    tab.className = 'dia-tab' + (di === activeDia ? ' active' : '');
-    if (di === activeDia) tab.style.background = cor;
-    tab.innerHTML = d.dia + (done ? ' ✅' : '') + (di === 4 ? ' ✍️' : '');
-    tab.addEventListener('click', () => { activeDia = di; renderDetail(); });
+  var tabs=document.getElementById('dtabs');tabs.innerHTML='';
+  s.d.forEach(function(d,di){
+    var done=isDone(aS+'_'+di);
+    var tab=document.createElement('button');
+    tab.className='dtab'+(di===aD?' active':'');
+    if(di===aD)tab.style.cssText='background:'+DC[di]+';border-color:'+DC[di]+';color:#000;';
+    tab.innerHTML=DE[di]+' '+DN[di]+(done?' OK':'')+(di===4?' (Red)':'');
+    tab.addEventListener('click',function(idx){return function(){aD=idx;renderDetail()}}(di));
     tabs.appendChild(tab);
   });
 
-  // Mission card
-  const dia = s.dias[activeDia];
-  const doneKey = `${activeSem}_${activeDia}`;
-  const doneNow = isDone(doneKey);
-  const mc = document.getElementById('mission-card');
+  var dia=s.d[aD],dKey=aS+'_'+aD,doneNow=isDone(dKey),cor=DC[aD];
+  var videos=dia.v.map(function(v){
+    return '<a class="vi" href="'+v.u+'" target="_blank" rel="noopener"><div class="vt" style="background:'+cor+'22">'+v.e+'</div><div class="vn"><div class="vtl">'+esc(v.t)+'</div><div class="vm">'+v.d+'</div><div class="vc" style="color:'+cor+'">'+esc(v.c)+'</div></div></a>';
+  }).join('');
 
-  // Video colors cycle
-  const vemojis = ['🎬','📹','▶️'];
-
-  let extraHtml = '';
-  if (activeSem === 0 && activeDia === 0 && dia.extra) {
-    extraHtml = `
-      <div>
-        <div class="block-title" style="color:${cor}">🏋️ EXERCÍCIO PRÁTICO ESPECIAL</div>
-        <div class="redacao-block">
-          <div class="rt">📌 ${dia.extra.titulo}</div>
-          <div class="instrucao">${dia.extra.instrucao}</div>
-          <div style="margin-top:8px"><a href="${dia.extra.link}" target="_blank">▶️ Ver exemplo no YouTube →</a></div>
-        </div>
-      </div>
-    `;
+  var exHtml='';
+  if(dia.ex){
+    exHtml='<div><div class="bt">EXERCICIO ESPECIAL</div><div class="exb"><div class="xtag">MISSAO ESPECIAL</div><div class="xtit">'+esc(dia.ex.tl)+'</div><div class="xtx">'+esc(dia.ex.tx)+'<br><br><a href="'+dia.ex.u+'" target="_blank">Ver exemplos no YouTube</a></div></div></div>';
   }
 
-  let redacaoHtml = '';
-  if (isSexta) {
-    redacaoHtml = `
-      <div>
-        <div class="block-title" style="color:#B45309">✍️ REDAÇÃO DA SEMANA</div>
-        <div class="redacao-block">
-          <div class="rt">📝 Tema desta semana</div>
-          <div class="tema">${redTema.tema}</div>
-          <div class="instrucao">${redTema.instrucao}</div>
-          <div style="margin-top:8px"><a href="${redTema.link}" target="_blank">▶️ Ver orientações no YouTube →</a></div>
-        </div>
-      </div>
-    `;
+  var sexHtml='';
+  if(isSex){
+    sexHtml='<div><div class="bt">REDACAO DA SEMANA</div><div class="redb"><div class="rtag">Tema Semana '+s.n+'</div><div class="rtit">'+esc(red.t)+'</div><div class="rtx">'+esc(red.i)+'<br><br><a href="'+red.u+'" target="_blank">Orientacoes no YouTube</a></div></div></div>'
+    +'<div><div class="bt">ESPANHOL DO ENEM</div><div class="espb"><div class="etag">Exercicio Semana '+s.n+'</div><div class="etit">'+esc(esp.t)+'</div><div class="etx">'+esc(esp.tx)+'<br><br><a href="'+esp.u+'" target="_blank">Praticar no YouTube</a></div></div></div>';
   }
 
-  mc.innerHTML = `
-    <div class="mission-header">
-      <div class="foco-label" style="color:${cor}">🎯 Foco do dia</div>
-      <h3>${dia.foco}</h3>
-    </div>
-    <div class="mission-body">
+  var doneBtn='<button class="cbtn'+(doneNow?' done':'')+'" id="cbtn_done" data-key="'+dKey+'">'+(doneNow?'Missao Concluida, Victor!':'Marcar missao como concluida')+'</button>';
 
-      <div>
-        <div class="block-title" style="color:${cor}">▶️ VÍDEOS SUGERIDOS</div>
-        <div class="video-list">
-          ${dia.videos.map((v,vi) => `
-            <a class="video-item" href="${v.url}" target="_blank" rel="noopener">
-              <div class="vthumb" style="background:${cor}22">${v.emoji}</div>
-              <div class="vinfo">
-                <div class="vtitle">${v.titulo}</div>
-                <div class="vdur">⏱ ${v.dur}</div>
-                <div class="vchannel" style="color:${cor}">📺 ${v.canal}</div>
-              </div>
-            </a>
-          `).join('')}
-        </div>
-      </div>
-
-      <div>
-        <div class="block-title" style="color:${cor}">🎮 ATIVIDADE PRÁTICA</div>
-        <a class="atividade-link" href="${dia.atividadeUrl}" target="_blank" rel="noopener" style="border-left-color:${cor}">
-          <div class="at-title">${dia.atividade}</div>
-          <div class="at-sub">🔗 Clique para buscar no YouTube →</div>
-        </a>
-      </div>
-
-      ${extraHtml}
-      ${redacaoHtml}
-
-      <div>
-        <div class="block-title" style="color:${cor}">⚡ DESAFIO DO DIA</div>
-        <div class="desafio-block">
-          <div class="dt">Missão</div>
-          <div class="dtxt">${dia.desafio}</div>
-        </div>
-      </div>
-
-      <button class="complete-btn ${doneNow ? 'done' : ''}" id="complete-btn" onclick="markDone('${doneKey}')">
-        ${doneNow ? '✅ Missão Concluída!' : '☐ Marcar como concluído'}
-      </button>
-    </div>
-  `;
+  document.getElementById('mc').innerHTML=
+    '<div class="mhdr"><div class="dbadge" style="background:'+cor+'22;border:2px solid '+cor+'">'+DE[aD]+'</div>'
+    +'<div><div class="fl" style="color:'+cor+'">'+DM[aD]+' - '+DN[aD]+'-feira</div><h3>'+esc(dia.f)+'</h3></div></div>'
+    +'<div class="mb">'
+    +'<div><div class="bt">VIDEOS SUGERIDOS (min 40 min)</div><div class="vl">'+videos+'</div></div>'
+    +'<div><div class="bt">ATIVIDADE PRATICA</div><a class="al" href="'+dia.au+'" target="_blank" rel="noopener" style="border-left-color:'+cor+'"><div class="at">'+esc(dia.at)+'</div><div class="as">Clique para buscar no YouTube</div></a></div>'
+    +exHtml+sexHtml
+    +'<div><div class="bt">DESAFIO DO DIA</div><div class="dsb"><div class="dtag">Missao Victor Kaua</div><div class="dtxt">'+esc(dia.ds)+'</div></div></div>'
+    +doneBtn
+    +'</div>';
+  attachDoneBtn();
 }
 
-function markDone(key) {
-  toggleDone(key);
-  renderGrid();
-  renderDetail();
+function markDone(k){toggleDone(k);renderGrid();renderDetail();}
+function attachDoneBtn(){
+  var btn=document.getElementById('cbtn_done');
+  if(btn){btn.addEventListener('click',function(){markDone(btn.getAttribute('data-key'))});}
 }
-
-// ─── INIT ────────────────────────────────────────────────────────────────
 renderGrid();
 </script>
 </body>
